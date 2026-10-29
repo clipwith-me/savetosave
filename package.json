@@ -1,0 +1,18 @@
+{
+  "name": "savetosave",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Website for Saved To Be Sent Mission Outreach (STS). Static site: no server needed.",
+  "scripts": {
+    "build": "npm run build:css",
+    "build:css": "tailwindcss -c tailwind.config.js -i src/tailwind.css -o assets/css/tailwind.css --minify",
+    "watch:css": "tailwindcss -c tailwind.config.js -i src/tailwind.css -o assets/css/tailwind.css --watch",
+    "serve": "node scripts/serve.mjs",
+    "test": "node --test --test-concurrency=1 \"tests/*.test.mjs\"",
+    "check": "npm run build:css && git diff --exit-code -- assets/css/tailwind.css && npm test"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0",
+    "tailwindcss": "3.4.17"
+  }
+}
