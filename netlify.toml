@@ -1,0 +1,16 @@
+# The site is static and assets/css/tailwind.css is already built and committed,
+# so Netlify only needs to publish the folder. No build step, no npm install.
+[build]
+  publish = "."
+  command = "echo 'Static site: nothing to build'"
+
+[build.environment]
+  # Skip installing the dev tools (Tailwind, Playwright): they are only for local work and tests.
+  NPM_FLAGS = "--omit=dev"
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1"
+
+# Visitors always get the latest published content.
+[[headers]]
+  for = "/content.json"
+  [headers.values]
+    Cache-Control = "no-cache"
