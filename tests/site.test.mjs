@@ -266,3 +266,15 @@ test("admin edits stay a draft until content.json is published", async () => {
   assert.equal(await visitor.page.locator("#draftBadge").count(), 0);
   await visitor.context.close();
 });
+
+test("with motion on, numbers count up to the published value and sections reveal", async () => {
+  const { page, context, log } = await openSite({ motion: true, content: { souls: "5,123+" }, storage: NO_POPUP });
+  await page.waitForFunction(() => document.getElementById("statSoulsDisplay").textContent === "5,123+", null, { timeout: 5000 });
+  assert.equal(await page.evaluate(() => document.documentElement.classList.contains("js-reveal")), true);
+  await page.evaluate(() => goTo("#about"));
+  await page.waitForFunction(() => document.querySelector("#about .sec-title").classList.contains("in"), null, { timeout: 5000 });
+  await page.evaluate(() => window.scrollTo(0, 2000));
+  await page.waitForFunction(() => document.getElementById("siteHeader").classList.contains("is-scrolled"));
+  assert.deepEqual(log.errors, []);
+  await context.close();
+});

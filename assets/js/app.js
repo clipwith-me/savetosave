@@ -1985,7 +1985,7 @@ function buildHubs() {
     const first = secs.slice().sort((a, b) => (a.compareDocumentPosition(b) & 4) ? -1 : 1)[0];
     const hub = document.createElement("div");
     hub.id = h.id; hub.className = "sts-hub bg-stsObsidian border-b border-black/10";
-    hub.innerHTML = `<div class="sts-hub-head"><span class="text-stsRed font-bold text-xs uppercase tracking-widest">Explore</span><h2 class="font-display text-2xl sm:text-4xl font-bold mt-1">${h.title}</h2><p class="text-gray-500 text-sm mt-2">${h.sub}</p></div>` +
+    hub.innerHTML = `<div class="sts-hub-head"><span class="eyebrow">Explore</span><h2 class="sec-title font-display">${h.title}</h2><p class="text-gray-500 text-base mt-3">${h.sub}</p></div>` +
       `<div class="sts-tabs"><div class="sts-tabs-in" role="tablist" aria-label="${h.title}">${h.tabs.map(t => `<button type="button" role="tab" aria-controls="${t[0]}" class="sts-tab" data-t="${t[0]}"><i class="fa-solid ${t[2]} mr-1.5" aria-hidden="true"></i>${t[1]}</button>`).join("")}</div></div>`;
     first.parentNode.insertBefore(hub, first);
     secs.forEach(s => { s.classList.add("hub-panel"); hub.appendChild(s); });
@@ -2063,6 +2063,60 @@ function paintNairaPrices() {
   document.querySelectorAll("[data-ngn]").forEach(el => { el.textContent = "₦" + nf(Number(el.dataset.ngn) * NGN_RATE); });
 }
 
+// ---------- Motion: header on scroll, count-up numbers, scroll reveals ----------
+const MOTION_OK = !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+// Animates "4,000+" from 0 to 4,000 with the suffix kept. Skipped when motion is unwelcome.
+function countUp(el) {
+  const text = el.textContent.trim();
+  const m = text.match(/^([\d,]+)(.*)$/);
+  if (!m || !MOTION_OK) return;
+  const target = Number(m[1].replace(/,/g, ""));
+  const token = (el._countToken = (el._countToken || 0) + 1);
+  const start = performance.now(), dur = 1600;
+  const step = now => {
+    if (el._countToken !== token) return; // content was re-rendered meanwhile
+    const t = Math.min(1, (now - start) / dur);
+    el.textContent = (t < 1 ? Math.round(target * (1 - Math.pow(1 - t, 3))).toLocaleString("en-US") : m[1]) + m[2];
+    if (t < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+function setupMotion() {
+  const header = document.getElementById("siteHeader");
+  const cta = document.querySelector(".mobile-cta");
+  const hero = document.getElementById("home");
+  const onScroll = () => {
+    if (header) header.classList.toggle("is-scrolled", window.scrollY > 12);
+    if (cta && hero) cta.classList.toggle("is-visible", window.scrollY > hero.offsetHeight * 0.7);
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  if (!("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    const el = en.target;
+    el.classList.add("in");
+    if (el.hasAttribute("data-countup")) countUp(el);
+    io.unobserve(el);
+  }), { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+  document.querySelectorAll("[data-countup]").forEach(el => io.observe(el));
+  if (!MOTION_OK) return;
+  // Static blocks only: cards that app.js re-renders would flash on every update.
+  document.documentElement.classList.add("js-reveal");
+  const targets = [
+    ".sec-title", ".sts-hub-head", "#hook-section .grid > div", "#events .grid > div", ".give-cat-card",
+    "#giving .lg\\:col-span-5", "#partner figure", "#training .grid > div", "#about .grid > div", ".footer-cta", "#gospel-map .grid > div"
+  ];
+  document.querySelectorAll(targets.join(",")).forEach((el, i) => {
+    el.classList.add("reveal");
+    el.style.transitionDelay = (i % 3) * 90 + "ms";
+    io.observe(el);
+  });
+}
+
 // Shows the admin, and only the admin, that the page includes unpublished edits.
 function paintDraftBadge() {
   let b = document.getElementById("draftBadge");
@@ -2089,11 +2143,13 @@ async function initSite() {
   await loadPublishedContent();
   renderAllUI();
   paintDraftBadge();
+  setupMotion();
   highlightGivingCards(document.getElementById("giveCategoryInput").value);
   refreshSharedCounts();
   if (location.hash && location.hash !== ADMIN_ROUTE) setTimeout(() => goTo(location.hash), 300);
   if (TEST_MODE) {
     const tb = document.createElement("div");
+    tb.id = "testBadge";
     tb.textContent = "TEST RUN: nothing here is final";
     tb.style.cssText = "position:fixed;left:10px;bottom:10px;z-index:55;background:#E8B923;color:#111;font:700 11px system-ui,sans-serif;padding:6px 10px;border-radius:999px;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,.4)";
     document.body.appendChild(tb);

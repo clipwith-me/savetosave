@@ -40,7 +40,8 @@ export async function teardown() {
  * options.formsubmit  false to make FormSubmit fail
  */
 export async function openSite(options = {}) {
-  const context = await browser.newContext({ viewport: { width: 1280, height: 900 }, acceptDownloads: true });
+  // Reduced motion keeps count-up numbers and scroll reveals out of the assertions.
+  const context = await browser.newContext({ viewport: { width: 1280, height: 900 }, acceptDownloads: true, reducedMotion: options.motion ? "no-preference" : "reduce" });
   const page = await context.newPage();
   const log = { errors: [], formsubmit: [], sheet: [], counter: [] };
   page.on("pageerror", e => log.errors.push(e.message));

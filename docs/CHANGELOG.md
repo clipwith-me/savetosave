@@ -1,5 +1,15 @@
 # Change log
 
+## 2026-10: visual redesign
+
+- **Hero:** full-screen with the photo visible, a large title-case headline with a red italic accent, glowing pill buttons, glass impact cards that count up, and a tilted donation card showing "$10 = 1 Bible".
+- **Header:** dark glass instead of the white bar. It tightens on scroll and has animated link underlines.
+- **Moving red band** under the hero listing what every gift does.
+- **Sections:** calm title-case headings instead of ALL CAPS, eyebrow labels, more breathing room. Cards lift on hover with photo zoom. The conference card has a red glow. Countdown tiles are split-flap style.
+- **Footer:** a closing call to action ("Someone is waiting to hear.") and four columns: about, explore, get involved, contact.
+- **Phones:** a floating "Register / Give Now" bar appears after the hero, and the top announcement is one line.
+- Scroll-reveal animations, smoother popups and focus glow on fields. All motion is switched off for visitors who ask for reduced motion.
+
 ## 2026-10: production hardening
 
 ### Fixed

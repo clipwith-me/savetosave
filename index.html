@@ -48,28 +48,29 @@
   <a href="#main" class="skip-link">Skip to main content</a>
   <noscript><div class="bg-amber-50 text-amber-900 text-sm text-center p-3">Some parts of this site (giving options, registration, the map) need JavaScript. Please turn it on, or contact us on +234 913 627 9311.</div></noscript>
 
-  <!-- TOP NOTIFICATION HOOK BAR -->
-  <div class="bg-stsRed text-white text-xs sm:text-sm py-2.5 px-4 border-b border-white/15">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
-      <p class="font-semibold flex items-center gap-2 justify-center">
-        <span class="bg-white text-stsRed font-extrabold px-2 py-0.5 rounded text-[11px] uppercase tracking-wider">Did You Know?</span>
-        <span id="topBarHookText">Your $10 or more puts a Bible in an unreached village, and your penny sends missionaries to isolated souls!</span>
+  <!-- TOP NOTIFICATION HOOK BAR (one line on phones, full message from tablet up) -->
+  <div class="topbar text-white text-xs sm:text-sm py-2 px-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+      <p class="font-semibold flex items-center gap-2 min-w-0">
+        <span class="hidden sm:inline bg-white text-stsRed font-extrabold px-2 py-0.5 rounded text-[11px] uppercase tracking-wider shrink-0">Did You Know?</span>
+        <span id="topBarHookText" class="hidden md:inline truncate">Your $10 or more puts a Bible in an unreached village, and your penny sends missionaries to isolated souls!</span>
+        <span class="md:hidden truncate"><i class="fa-solid fa-book-bible mr-1" aria-hidden="true"></i>$10 puts a Bible in an unreached village</span>
       </p>
       <div class="flex items-center gap-3 shrink-0">
-        <a href="#giving" class="underline font-bold hover:text-black transition">Give $10 or More &rarr;</a>
-        <button onclick="openHookModal()" class="bg-black/30 hover:bg-black/50 px-2.5 py-1 rounded text-xs font-semibold">See Impact</button>
+        <a href="#giving" class="underline font-bold hover:text-black transition">Give &rarr;</a>
+        <button onclick="openHookModal()" class="hidden sm:inline-block bg-black/30 hover:bg-black/50 px-2.5 py-1 rounded text-xs font-semibold">See Impact</button>
       </div>
     </div>
   </div>
 
   <!-- STICKY NAVIGATION BAR (Responsive Desktop + Mobile Drawer) -->
-  <header class="sticky top-0 z-50 bg-stsObsidian/95 backdrop-blur-md border-b border-black/10">
+  <header id="siteHeader" class="site-header sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       <!-- Official STS Logo -->
       <a href="#home" class="flex items-center gap-3 group" aria-label="Saved To Be Sent, back to top">
         <div class="w-11 h-14 bg-stsRed rounded-md p-1.5 shadow-lg shadow-stsRed/30 border border-black/15 shrink-0"><img src="assets/img/logo.png" alt="" width="212" height="292" class="w-full h-full object-contain" /></div>
         <div>
-          <span class="font-display font-bold text-base sm:text-lg tracking-wider block leading-none text-gray-900">SAVED TO BE SENT</span>
+          <span class="font-display font-bold text-base sm:text-lg tracking-wide block leading-none text-white">Saved To Be Sent</span>
           <span class="font-script text-stsRed text-lg sm:text-xl leading-none">Saved to save™</span>
         </div>
       </a>
@@ -113,83 +114,90 @@
 
   <main id="main">
   <!-- HERO SECTION -->
-  <section id="home" class="relative py-12 sm:py-20 lg:py-24 overflow-hidden sts-hero text-white">
-    <!-- Background Royalty-Free Crusade Image -->
-    <div class="absolute inset-0 z-0">
-      <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1600&q=70" alt="" fetchpriority="high" class="w-full h-full object-cover opacity-20" />
-      <div class="absolute inset-0 bg-gradient-to-br from-black/90 via-stsObsidian/90 to-stsDarkRed/70"></div>
+  <section id="home" class="hero relative overflow-hidden text-white">
+    <!-- Background: the photo now shows through instead of sitting under a near-black overlay -->
+    <div class="absolute inset-0 z-0" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1920&q=75" alt="" fetchpriority="high" class="hero-photo w-full h-full object-cover" />
+      <div class="hero-shade absolute inset-0"></div>
+      <div class="hero-glow hero-glow-1"></div>
+      <div class="hero-glow hero-glow-2"></div>
     </div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-        <!-- Left Column -->
-        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/30 text-white text-xs font-bold uppercase tracking-widest">
-            <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
-            Global Evangelism & Village Invasions
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 sm:pt-16 lg:pt-14 lg:pb-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7 space-y-7 text-center lg:text-left">
+          <div class="hero-pill inline-flex items-center gap-2.5">
+            <span class="relative flex w-2.5 h-2.5"><span class="absolute inline-flex w-full h-full rounded-full bg-stsRed opacity-75 animate-ping"></span><span class="relative inline-flex w-2.5 h-2.5 rounded-full bg-stsRed"></span></span>
+            Global Evangelism &amp; Village Outreach
           </div>
-          <h1 id="heroTitleDisplay" class="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
-            SAVED TO BE <span class="text-white">SENT.</span><br />
-            REACHING THE <span class="underline decoration-white">UNREACHED.</span>
+          <h1 id="heroTitleDisplay" class="hero-title font-display">
+            Saved to be <em class="hero-accent">sent.</em><br />
+            Reaching the unreached.
           </h1>
-          <p id="heroSubDisplay" class="text-white/90 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+          <p id="heroSubDisplay" class="text-white/85 text-lg sm:text-xl max-w-2xl mx-auto lg:mx-0 leading-relaxed">
             Taking the fire of the Gospel across unreached African villages, Asian frontiers, streets, and campuses. Every soul matters. Every seed sends the Word.
           </p>
 
-          <!-- Primary CTA Buttons -->
-          <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
-            <a href="#events" class="bg-white hover:bg-gray-100 text-stsRed font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-black/20 transition flex items-center gap-2">
-              <i class="fa-solid fa-calendar-check"></i> Register: 2027 Conference (200 Cap)
+          <div class="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-3 pt-1">
+            <a href="#giving" class="btn-primary">
+              <i class="fa-solid fa-book-bible" aria-hidden="true"></i> Give $10 for a Village Bible
             </a>
-            <a href="#giving" class="bg-stsDarkRed text-white hover:bg-black font-bold px-6 py-3.5 rounded-xl transition flex items-center gap-2">
-              <i class="fa-solid fa-book-bible text-white"></i> Send $10 or More for Village Bibles
+            <a href="#events" class="btn-glass">
+              <i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Register for Conference 2027
             </a>
           </div>
 
-          <!-- Editable Live Impact Numbers Grid -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6">
-            <div class="stat-card p-4 rounded-xl text-center">
-              <div id="statSoulsDisplay" class="text-2xl sm:text-3xl font-extrabold text-white">4,000+</div>
-              <div class="text-xs text-white/80 uppercase font-semibold mt-1">Souls Saved</div>
+          <!-- Impact numbers (editable in the admin backend); they count up when they come into view -->
+          <dl class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+            <div class="stat-glass">
+              <dd id="statSoulsDisplay" class="stat-num" data-countup>4,000+</dd>
+              <dt class="stat-label">Souls Saved</dt>
             </div>
-            <div class="stat-card p-4 rounded-xl text-center">
-              <div id="statBiblesDisplay" class="text-2xl sm:text-3xl font-extrabold text-white">2,500+</div>
-              <div class="text-xs text-white/80 uppercase font-semibold mt-1">Bibles Given</div>
+            <div class="stat-glass">
+              <dd id="statBiblesDisplay" class="stat-num" data-countup>2,500+</dd>
+              <dt class="stat-label">Bibles Given</dt>
             </div>
-            <div class="stat-card p-4 rounded-xl text-center">
-              <div id="statVillagesDisplay" class="text-2xl sm:text-3xl font-extrabold text-white">15+</div>
-              <div class="text-xs text-white/80 uppercase font-semibold mt-1">Villages Reached</div>
+            <div class="stat-glass">
+              <dd id="statVillagesDisplay" class="stat-num" data-countup>15+</dd>
+              <dt class="stat-label">Villages Reached</dt>
             </div>
-            <div class="stat-card p-4 rounded-xl text-center">
-              <div id="statMissionariesDisplay" class="text-2xl sm:text-3xl font-extrabold text-white">40+</div>
-              <div class="text-xs text-white/80 uppercase font-semibold mt-1">Sent Missionaries</div>
+            <div class="stat-glass">
+              <dd id="statMissionariesDisplay" class="stat-num" data-countup>40+</dd>
+              <dt class="stat-label">Missionaries Sent</dt>
             </div>
-          </div>
+          </dl>
         </div>
 
-        <!-- Right Column: Attention-Grabbing Visual Hook Card -->
+        <!-- Floating donation card -->
         <div class="lg:col-span-5">
-          <div class="bg-white border-2 border-white rounded-2xl overflow-hidden shadow-2xl">
-            <div class="relative h-56 sm:h-64">
-              <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=900&q=80" alt="Children in a village outreach" decoding="async" class="w-full h-full object-cover" />
-              <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-black/30"></div>
-              <span class="absolute top-3 left-3 bg-stsRed text-white text-xs font-extrabold uppercase px-3 py-1 rounded-full shadow">
-                Urgent Mission Call
+          <div class="hook-card">
+            <div class="relative h-56 sm:h-64 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=900&q=80" alt="Children in a village outreach" decoding="async" class="w-full h-full object-cover hook-card-img" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#14151B] via-[#14151B]/20 to-transparent"></div>
+              <span class="absolute top-4 left-4 inline-flex items-center gap-1.5 bg-stsRed text-white text-[11px] font-extrabold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-lg">
+                <i class="fa-solid fa-bolt" aria-hidden="true"></i> Urgent Mission Call
               </span>
+              <div class="absolute bottom-4 left-5 right-5 flex items-end justify-between">
+                <div>
+                  <div class="text-4xl font-extrabold leading-none">$10</div>
+                  <div class="text-xs uppercase tracking-widest text-white/80 mt-1">= 1 Bible delivered</div>
+                </div>
+                <div class="text-right text-xs text-white/80">or <span data-ngn="10" class="font-bold text-white">₦14,000</span></div>
+              </div>
             </div>
-            <div class="p-6 space-y-4">
-              <h3 id="cardHookTitle" class="font-display text-xl sm:text-2xl font-bold text-gray-900 leading-snug">
-                "Do you know that your <span class="text-stsRed">$10</span> can get an unreached area a Bible so they have access to God's Word?"
-              </h3>
-              <p id="cardHookSub" class="text-gray-600 text-sm leading-relaxed">
-                Do you know that your <strong class="text-gray-900">penny</strong> can push missionaries into deep villages to get the Gospel across to isolated areas where Christ has never been named?
+            <div class="p-6 sm:p-7 space-y-4">
+              <h2 id="cardHookTitle" class="font-display text-2xl font-bold text-white leading-snug">
+                Your <span class="text-stsRed">$10</span> puts God's Word in an unreached home.
+              </h2>
+              <p id="cardHookSub" class="text-white/70 text-sm leading-relaxed">
+                And every <strong class="text-white">penny</strong> pushes missionaries deeper into villages where Christ has never been named.
               </p>
-              <div class="grid grid-cols-2 gap-3 pt-2">
-                <button onclick="selectFundAndScroll('Bibles for Unreached Areas ($10/Bible)')" class="bg-stsRed hover:bg-red-700 text-white font-bold py-3 px-4 rounded-xl text-xs sm:text-sm transition text-center">
-                  Give $10 or More for Bibles
+              <div class="grid grid-cols-2 gap-3 pt-1">
+                <button onclick="selectFundAndScroll('Bibles for Unreached Areas ($10/Bible)')" class="btn-primary btn-sm justify-center">
+                  Give for Bibles
                 </button>
-                <button onclick="selectFundAndScroll('Missionary Support in the Field')" class="bg-black/5 hover:bg-black/10 text-gray-900 font-bold py-3 px-4 rounded-xl text-xs sm:text-sm border border-black/15 transition text-center">
-                  Push a Missionary
+                <button onclick="selectFundAndScroll('Missionary Support in the Field')" class="btn-glass btn-sm justify-center">
+                  Send a Missionary
                 </button>
               </div>
             </div>
@@ -197,14 +205,34 @@
         </div>
       </div>
     </div>
+
+    <a href="#hook-section" class="scroll-cue hidden lg:flex" aria-label="Scroll to learn more"><span></span></a>
   </section>
+
+  <!-- Moving band of what every gift does -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Bibles for the unreached</span><i class="fa-solid fa-cross"></i>
+      <span>Missionaries sent</span><i class="fa-solid fa-cross"></i>
+      <span>Village crusades</span><i class="fa-solid fa-cross"></i>
+      <span>Gospel tracts in local dialects</span><i class="fa-solid fa-cross"></i>
+      <span>Medical &amp; welfare outreach</span><i class="fa-solid fa-cross"></i>
+      <span>Saved to save</span><i class="fa-solid fa-cross"></i>
+      <span>Bibles for the unreached</span><i class="fa-solid fa-cross"></i>
+      <span>Missionaries sent</span><i class="fa-solid fa-cross"></i>
+      <span>Village crusades</span><i class="fa-solid fa-cross"></i>
+      <span>Gospel tracts in local dialects</span><i class="fa-solid fa-cross"></i>
+      <span>Medical &amp; welfare outreach</span><i class="fa-solid fa-cross"></i>
+      <span>Saved to save</span><i class="fa-solid fa-cross"></i>
+    </div>
+  </div>
 
   <!-- DEDICATED VISUAL HOOK SECTION (ROYALTY-FREE PHOTOGRAPHY + IMPACT BREAKDOWN) -->
   <section id="hook-section" class="py-16 bg-gradient-to-b from-stsObsidian to-stsCard border-b border-black/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="text-stsRed font-bold text-xs uppercase tracking-widest">Every Seed Has a Voice</span>
-        <h2 class="font-display text-2xl sm:text-4xl font-bold mt-2">HOW YOUR $10 & EVERY PENNY TRANSFORMS ISOLATED VILLAGES</h2>
+        <span class="eyebrow">Every Seed Has a Voice</span>
+        <h2 class="sec-title font-display">How Your $10 & Every Penny Transforms Isolated Villages</h2>
         <p class="text-gray-500 text-sm sm:text-base mt-3">Representative pictures of where your mission support goes.</p>
       </div>
 
@@ -279,12 +307,12 @@
   <section id="events" class="py-16 bg-stsObsidian border-b border-black/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="text-stsRed font-bold text-xs uppercase tracking-widest">Prophetic & Missionary Calendar</span>
-        <h2 class="font-display text-2xl sm:text-4xl font-bold mt-2">UPCOMING 2027 CONFERENCES & OUTREACHES</h2>
+        <span class="eyebrow">Prophetic & Missionary Calendar</span>
+        <h2 class="sec-title font-display">Upcoming 2027 Conferences & Outreaches</h2>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- EVENT 1: MISSIONARIES CONFERENCE 2027 (FEB 10-12) -->
+        <!-- EVENT 1: Missionaries Conference 2027 (FEB 10-12) -->
         <div class="bg-stsCard border-2 border-stsRed rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xl">
           <div>
             <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
@@ -295,7 +323,7 @@
                 Limited to <span id="confCapLimitDisplay">200</span> Missionaries
               </span>
             </div>
-            <h3 class="font-display text-2xl sm:text-3xl font-bold text-gray-900">MISSIONARIES CONFERENCE 2027</h3>
+            <h3 class="font-display text-2xl sm:text-3xl font-bold text-gray-900">Missionaries Conference 2027</h3>
             <p class="text-gray-600 text-sm mt-2 leading-relaxed">
               3 days of intense spiritual equipping, fire impartation, and deployment strategy for field missionaries and harvest workers.
             </p>
@@ -350,7 +378,7 @@
                 Village & Rural Invasion
               </span>
             </div>
-            <h3 class="font-display text-2xl sm:text-3xl font-bold text-gray-900">APRIL MEGA MISSION OUTREACH</h3>
+            <h3 class="font-display text-2xl sm:text-3xl font-bold text-gray-900">April Mega Mission Outreach</h3>
             <p class="text-gray-600 text-sm mt-2 leading-relaxed">
               Full-scale evangelistic invasion taking free Bibles, medical aid, welfare packages, and open-air crusades into unreached villages.
             </p>
@@ -403,8 +431,8 @@
   <section id="gospel-map" class="py-16 bg-stsCard border-b border-black/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-10">
-        <span class="text-stsRed font-bold text-xs uppercase tracking-widest">Global Harvest Radar</span>
-        <h2 class="font-display text-2xl sm:text-4xl font-bold mt-2">GOSPEL FOOTPRINT IN AFRICA & ASIA</h2>
+        <span class="eyebrow">Global Harvest Radar</span>
+        <h2 class="sec-title font-display">Gospel Footprint in Africa & Asia</h2>
         <p class="text-gray-500 text-sm mt-2">
           Interactive map labeled in <strong class="text-stsRed">Red</strong> showing where the Gospel has reached in Africa, where it has not yet reached in Africa, and where it has reached in Asia.
         </p>
@@ -466,8 +494,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
         <div>
-          <span class="text-stsRed font-bold text-xs uppercase tracking-widest">Field Evidence & Reports</span>
-          <h2 class="font-display text-2xl sm:text-4xl font-bold mt-2">MISSION & CRUSADE CATALOG</h2>
+          <span class="eyebrow">Field Evidence & Reports</span>
+          <h2 class="sec-title font-display">Mission & Crusade Catalog</h2>
         </div>
         <!-- Category Filter Buttons -->
         <div class="flex flex-wrap gap-2">
@@ -489,8 +517,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
         <div>
-          <span class="text-stsRed font-bold text-xs uppercase tracking-widest">Moments From The Field</span>
-          <h2 class="font-display text-2xl sm:text-4xl font-bold mt-1">PAST OUTREACH GALLERY</h2>
+          <span class="eyebrow">Moments From The Field</span>
+          <h2 class="sec-title font-display">Past Outreach Gallery</h2>
         </div>
       </div>
       <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"></div>
@@ -502,8 +530,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
         <div>
-          <span class="text-stsRed font-bold text-xs uppercase tracking-widest">Watch Field Highlights</span>
-          <h2 class="font-display text-2xl sm:text-4xl font-bold mt-1">PREVIOUS OUTREACH VIDEOS</h2>
+          <span class="eyebrow">Watch Field Highlights</span>
+          <h2 class="sec-title font-display">Previous Outreach Videos</h2>
         </div>
       </div>
 
@@ -515,8 +543,8 @@
   <section id="giving" class="py-16 bg-stsObsidian border-b border-black/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="text-stsRed font-bold text-xs uppercase tracking-widest">100% Purpose-Allocated Giving</span>
-        <h2 class="font-display text-2xl sm:text-4xl font-bold mt-2">GIVE TO SAVE & SEND</h2>
+        <span class="eyebrow">100% Purpose-Allocated Giving</span>
+        <h2 class="sec-title font-display">Give to Save & Send</h2>
         <p class="text-gray-500 text-sm mt-2">
           Select the exact mission category below. Your seed is tagged to the purpose you choose so 100% of it goes strictly to that need.
         </p>
@@ -663,8 +691,8 @@
   <section id="partner" class="py-16 bg-stsCard border-b border-black/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-10">
-        <span class="text-stsRed font-bold text-xs uppercase tracking-widest">Walk With Us Every Month</span>
-        <h2 class="font-display text-2xl sm:text-4xl font-bold mt-2">DO YOU WANT TO BECOME OUR MONTHLY PARTNER?</h2>
+        <span class="eyebrow">Walk With Us Every Month</span>
+        <h2 class="sec-title font-display">Do You Want to Become Our Monthly Partner?</h2>
         <p class="text-gray-500 text-sm sm:text-base mt-3">A seed sown every month keeps Bibles, relief packages and missionaries moving into unreached villages all year round. Tap below and tell us your pledge.</p>
       </div>
 
@@ -771,8 +799,8 @@
 
         <!-- Form 1: Missionary Training & Join Mission Field -->
         <div class="bg-stsObsidian border border-black/10 rounded-2xl p-6 sm:p-8">
-          <span class="text-stsRed font-bold text-xs uppercase tracking-widest">School of Fire & Deployment</span>
-          <h3 class="font-display text-2xl font-bold text-gray-900 mt-1 mb-2">BE TRAINED & JOIN THE MISSION FIELD</h3>
+          <span class="eyebrow">School of Fire & Deployment</span>
+          <h3 class="font-display text-2xl font-bold text-gray-900 mt-1 mb-2">Be Trained &amp; Join the Mission Field</h3>
           <p class="text-gray-500 text-sm mb-6">
             Want to be trained as a field evangelist, intercessor, medical volunteer, or rural missionary? Fill out this form—details are sent straight to <strong class="text-gray-900">stsglobaloutreach@gmail.com</strong>.
           </p>
@@ -821,8 +849,8 @@
 
         <!-- Form 2: 24/7 Prayer Request & Testimony Altar -->
         <div id="prayer" class="bg-stsObsidian border border-black/10 rounded-2xl p-6 sm:p-8">
-          <span class="text-stsRed font-bold text-xs uppercase tracking-widest">24/7 Intercessory Wall</span>
-          <h3 class="font-display text-2xl font-bold text-gray-900 mt-1 mb-2">SEND YOUR PRAYER REQUEST</h3>
+          <span class="eyebrow">24/7 Intercessory Wall</span>
+          <h3 class="font-display text-2xl font-bold text-gray-900 mt-1 mb-2">Send Your Prayer Request</h3>
           <p class="text-gray-500 text-sm mb-6">
             Our missionary intercessors pray over every burden submitted here. Every request is handled with care and confidentiality.
           </p>
@@ -866,8 +894,8 @@
   <section id="about" class="py-16 bg-stsObsidian border-b border-black/10">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-10">
-        <span class="text-stsRed font-bold text-xs uppercase tracking-widest">Who We Are</span>
-        <h2 class="font-display text-2xl sm:text-4xl font-bold mt-2 text-gray-900">ABOUT SAVED TO BE SENT</h2>
+        <span class="eyebrow">Who We Are</span>
+        <h2 class="sec-title font-display">About Saved To Be Sent</h2>
         <p class="text-gray-600 text-sm sm:text-base mt-3 leading-relaxed">
           Saved To Be Sent Mission Outreach (STS) carries the Gospel into unreached villages, streets and campuses across Africa and Asia. Saved to save is our heartbeat: every soul reached becomes a soul sent.
         </p>
@@ -914,28 +942,76 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="bg-black border-t-4 border-stsRed py-12 text-sm text-white/80">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-12 bg-stsRed rounded p-1 shrink-0 border border-white/30"><img src="assets/img/logo.png" alt="" loading="lazy" width="212" height="292" class="w-full h-full object-contain" /></div>
+  <footer class="site-footer text-sm text-white/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
+      <!-- Closing call to action -->
+      <div class="footer-cta">
         <div>
-          <p class="text-white font-bold">Saved To Be Sent Mission Outreach (STS)</p>
-          <p class="text-xs">Official Receiver Email: <a href="mailto:stsglobaloutreach@gmail.com" class="text-white underline font-semibold">stsglobaloutreach@gmail.com</a></p>
-          <p class="text-xs mt-1 text-white/60">&copy; <span id="footerYear">2026</span> Saved To Be Sent Mission Outreach. Saved to save&trade;</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white">Someone is waiting to hear.</h2>
+          <p class="text-white/80 mt-2 max-w-xl">One Bible, one missionary, one village at a time. Stand with us today.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+          <a href="#giving" class="btn-light"><i class="fa-solid fa-heart" aria-hidden="true"></i> Give Now</a>
+          <a href="#partner" class="btn-outline-light"><i class="fa-solid fa-seedling" aria-hidden="true"></i> Partner Monthly</a>
         </div>
       </div>
-      <nav class="w-full sm:w-auto overflow-x-auto" aria-label="Footer">
-        <div class="flex flex-nowrap items-center gap-2 text-xs font-bold whitespace-nowrap">
-          <button onclick="openHookModal()" class="ft-link">Why $10 Matters</button>
-          <a href="#events" class="ft-link">2027 Conference</a>
-          <a href="#gospel-map" class="ft-link">Mission Map</a>
-          <a href="#about" class="ft-link">About</a>
-          <a href="https://www.facebook.com/StsglobalOutreach" target="_blank" rel="noopener" class="ft-link"><i class="fa-brands fa-facebook"></i> Page</a>
-          <a href="https://www.facebook.com/olaseru.daniel" target="_blank" rel="noopener" class="ft-link"><i class="fa-brands fa-facebook"></i> Daniel</a>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 pt-14">
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-14 bg-stsRed rounded-md p-1.5 shrink-0"><img src="assets/img/logo.png" alt="" loading="lazy" width="212" height="292" class="w-full h-full object-contain" /></div>
+            <div>
+              <p class="text-white font-display font-bold text-lg leading-tight">Saved To Be Sent</p>
+              <p class="font-script text-stsRed text-xl leading-none">Saved to save&trade;</p>
+            </div>
+          </div>
+          <p class="leading-relaxed">&ldquo;How shall they preach, except they be sent?&rdquo; <span class="text-white/50">Romans 10:15</span></p>
         </div>
-      </nav>
+        <nav aria-label="Footer: explore">
+          <h3 class="footer-h">Explore</h3>
+          <ul class="space-y-2.5">
+            <li><a href="#events" class="footer-link">2027 Conference</a></li>
+            <li><a href="#catalog" class="footer-link">Our Work &amp; Impact</a></li>
+            <li><a href="#gospel-map" class="footer-link">Mission Map</a></li>
+            <li><button type="button" onclick="openHookModal()" class="footer-link">Why $10 Matters</button></li>
+          </ul>
+        </nav>
+        <nav aria-label="Footer: get involved">
+          <h3 class="footer-h">Get Involved</h3>
+          <ul class="space-y-2.5">
+            <li><a href="#giving" class="footer-link">Give Once</a></li>
+            <li><a href="#partner" class="footer-link">Become a Monthly Partner</a></li>
+            <li><a href="#training" class="footer-link">Join the Mission Field</a></li>
+            <li><a href="#prayer" class="footer-link">Send a Prayer Request</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h3 class="footer-h">Contact</h3>
+          <ul class="space-y-2.5">
+            <li><a href="tel:+2349136279311" class="footer-link"><i class="fa-solid fa-phone w-5" aria-hidden="true"></i>+234 913 627 9311</a></li>
+            <li><a href="https://wa.me/2349035458629" target="_blank" rel="noopener" class="footer-link"><i class="fa-brands fa-whatsapp w-5" aria-hidden="true"></i>+234 903 545 8629</a></li>
+            <li><a href="mailto:stsglobaloutreach@gmail.com" class="footer-link break-all"><i class="fa-solid fa-envelope w-5" aria-hidden="true"></i>stsglobaloutreach@gmail.com</a></li>
+          </ul>
+          <div class="flex gap-2 mt-5">
+            <a href="https://www.facebook.com/StsglobalOutreach" target="_blank" rel="noopener" class="social-btn" aria-label="STS on Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="https://wa.me/2349136279311" target="_blank" rel="noopener" class="social-btn" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+            <a href="https://www.facebook.com/olaseru.daniel" target="_blank" rel="noopener" class="social-btn" aria-label="Daniel on Facebook"><i class="fa-solid fa-user" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/50">
+        <p>&copy; <span id="footerYear">2026</span> Saved To Be Sent Mission Outreach. All rights reserved.</p>
+        <p>Every seed is tagged to the purpose you choose.</p>
+      </div>
     </div>
   </footer>
+
+  <!-- Mobile quick actions: giving and registering stay one tap away while scrolling -->
+  <nav class="mobile-cta lg:hidden" aria-label="Quick actions">
+    <a href="#events" class="mobile-cta-btn"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Register</a>
+    <a href="#giving" class="mobile-cta-btn is-primary"><i class="fa-solid fa-heart" aria-hidden="true"></i> Give Now</a>
+  </nav>
 
   <!-- ATTENTION HOOK WELCOME MODAL (SHOWS ON VISIT) -->
   <div id="hookPopupModal" class="sts-modal fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="hookTitle">
@@ -1029,7 +1105,7 @@
     <div class="bg-stsCard border-2 border-stsRed rounded-2xl max-w-md w-full p-6 space-y-4 max-h-[92vh] overflow-y-auto">
       <div class="flex justify-between items-start">
         <div>
-          <span class="text-stsRed font-bold text-xs uppercase tracking-widest">Send Your Seed</span>
+          <span class="eyebrow">Send Your Seed</span>
           <h3 id="accountModalTitle" class="font-display font-bold text-xl text-gray-900 mt-1">Choose How You Want to Give</h3>
         </div>
         <button onclick="closeAccountModal()" aria-label="Close" class="text-gray-500 hover:text-white text-2xl leading-none">&times;</button>
@@ -1058,7 +1134,7 @@
     <div class="bg-stsCard border-2 border-stsRed rounded-2xl max-w-md w-full p-6 space-y-4 max-h-[92vh] overflow-y-auto">
       <div class="flex justify-between items-start">
         <div>
-          <span class="text-stsRed font-bold text-xs uppercase tracking-widest">Monthly Partnership</span>
+          <span class="eyebrow">Monthly Partnership</span>
           <h3 id="partnerModalTitle" class="font-display font-bold text-xl text-gray-900 mt-1">Become Our Monthly Partner</h3>
         </div>
         <button type="button" onclick="closePartnerModal()" aria-label="Close" class="text-gray-500 hover:text-white text-2xl leading-none">&times;</button>
