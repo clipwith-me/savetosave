@@ -298,3 +298,12 @@ main input:focus,main select:focus,main textarea:focus,.sts-modal input:focus,.s
 .topbar{background:linear-gradient(90deg,#B00000,#E60000 50%,#B00000)}
 .hero-pill{max-width:100%}
 @media(max-width:480px){.hero-pill{font-size:.62rem;letter-spacing:.12em}}
+
+/* ---- Popups on small screens ----
+   Panels never grow past the visible screen (dvh excludes the phone's address bar);
+   anything longer scrolls inside the panel, and only inside it. */
+.modal-panel{display:flex;flex-direction:column;max-height:calc(100dvh - 2rem)}
+@supports not (height:100dvh){.modal-panel{max-height:calc(100vh - 2rem)}}
+.modal-scroll{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.sts-modal > div{overscroll-behavior:contain}
+@media(max-width:480px){.sts-modal.p-4{padding:.75rem}}

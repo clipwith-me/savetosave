@@ -278,3 +278,35 @@ test("with motion on, numbers count up to the published value and sections revea
   assert.deepEqual(log.errors, []);
   await context.close();
 });
+
+test("every popup fits a small phone screen and can be closed", async () => {
+  const { page, context, log } = await openSite({ storage: NO_POPUP });
+  const openers = {
+    hookPopupModal: () => openHookModal(),
+    accountModal: () => openAccountModal("Bibles for Unreached Areas ($10/Bible)"),
+    eventRegModal: () => openEventModal("Missionaries Conference 2027 (Feb 10-12)"),
+    partnerModal: () => openPartnerModal()
+  };
+  for (const size of [{ width: 360, height: 640 }, { width: 320, height: 568 }]) {
+    await page.setViewportSize(size);
+    for (const [id, open] of Object.entries(openers)) {
+      await page.evaluate(open);
+      const box = await page.locator(`#${id} > div`).boundingBox();
+      assert.ok(box.y >= 0 && box.y + box.height <= size.height + 1, `${id} fits ${size.width}x${size.height} (top ${box.y}, bottom ${box.y + box.height})`);
+      const close = page.locator(`#${id} button[aria-label="Close"]`).first();
+      assert.equal(await close.isVisible(), true, `${id} close button visible`);
+      const c = await close.boundingBox();
+      assert.ok(c.y >= 0 && c.y + c.height <= size.height, `${id} close button on screen`);
+      await page.keyboard.press("Escape");
+      assert.equal(await page.isVisible(`#${id}`), false, `${id} closes`);
+    }
+  }
+  // The long welcome popup scrolls inside itself so its buttons are reachable.
+  await page.evaluate(() => openHookModal());
+  await page.locator("#hookPopupModal .modal-scroll").evaluate(el => { el.scrollTop = el.scrollHeight; });
+  assert.equal(await page.locator("text=Explore Mission Site").isVisible(), true);
+  await page.click("text=Explore Mission Site");
+  assert.equal(await page.isVisible("#hookPopupModal"), false);
+  assert.deepEqual(log.errors, []);
+  await context.close();
+});
