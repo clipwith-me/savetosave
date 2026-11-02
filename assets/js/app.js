@@ -32,37 +32,37 @@ const DEFAULT_CONTENT = {
     {
       title: "Ile-Ife & Osun Rural Crusade Invasion",
       category: "Crusades",
-      img: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=800&q=80",
+      img: "assets/img/photos/harvest-day-2-800.jpg",
       desc: "3 nights of open-air Gospel power, 1,400+ decisions for Christ, and free village Bible distribution."
     },
     {
       title: "Ogun Waterside & Isolated Village Trek",
       category: "Village Invasions",
-      img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80",
+      img: "assets/img/photos/village-trek-800.jpg",
       desc: "Field missionaries crossed riverine settlements bringing audio & print Bibles to unreached families."
     },
     {
       title: "10,000 Dialect Bibles & Gospel Tracts Drive",
       category: "Bibles & Tracts",
-      img: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=800&q=80",
+      img: "assets/img/photos/bush-path-800.jpg",
       desc: "Powered by $10 Bible sponsors—equipping new converts in rural Africa & Asia with God's Word."
     },
     {
       title: "Free Rural Medical & Welfare Outreach",
       category: "Medical & Welfare",
-      img: "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=800&q=80",
+      img: "assets/img/photos/team-at-village-house-800.jpg",
       desc: "Combining compassionate medical care, food bags, and one-on-one soul winning."
     },
     {
       title: "Northern Frontier Motorcycle Missionaries",
       category: "Village Invasions",
-      img: "https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=800&q=80",
+      img: "assets/img/photos/bush-path-800.jpg",
       desc: "Every penny given fuels motorbikes taking Sent Ones into unreached nomadic settlements."
     },
     {
       title: "Youth & Campus Evangelism Fire",
       category: "Crusades",
-      img: "https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80",
+      img: "assets/img/photos/outreach-team-800.jpg",
       desc: "Raising radical student witnesses and deploying them into streets and marketplaces."
     }
   ],

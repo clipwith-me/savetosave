@@ -14,7 +14,7 @@ Work through this before sharing the link widely (church announcements, WhatsApp
 
 ## Should do (trust and growth)
 
-- [ ] **Use real photos.** The hero, catalog and gallery use stock photos from Unsplash. Donors notice stock pictures. Real outreach photos (with permission from the people in them) build far more trust. Replace catalog and gallery pictures in the admin backend, and the hero and hook-card pictures in `index.html`.
+- [x] **Use real photos.** Done: every image on the site is now an STS outreach photo (`assets/img/photos/`). Add more from the admin backend (gallery, catalog) or by uploading to that folder.
 - [ ] **Add real videos.** The video tab invites people to Facebook until you add YouTube links in the admin backend. The old placeholders all played the same unrelated music video.
 - [ ] **Confirm the published claims.** Impact numbers ("4,000+ souls", "2,500+ Bibles") and "100% of it goes strictly to that need" should be numbers and promises the ministry can stand behind if asked.
 - [ ] **Set the link preview image.** Replace the `og:image` URL in `index.html` with a real 1200x630 photo hosted on your site. It is what WhatsApp and Facebook show when the link is shared.
