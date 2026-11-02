@@ -85,13 +85,13 @@ const DEFAULT_CONTENT = {
     { name: "Chiang Rai Hill Tribes, Northern Thailand", region: "ASIA_REACHED", lat: 19.91, lng: 99.84, note: "Mountain missionary outposts & children's outreach" },
     { name: "Kathmandu Valley Outskirts, Nepal", region: "ASIA_REACHED", lat: 27.71, lng: 85.32, note: "Trekking evangelists reaching mountain communities" }
   ],
+  // Real outreach photos (assets/img/photos). Add more from the Admin backend.
   gallery: [
-    { img: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=80", caption: "Open air crusade night" },
-    { img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=900&q=80", caption: "Village trek with the Word" },
-    { img: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=900&q=80", caption: "Bible distribution" },
-    { img: "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=900&q=80", caption: "Medical and welfare outreach" },
-    { img: "https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=900&q=80", caption: "Children in the village" },
-    { img: "https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=900&q=80", caption: "Street evangelism" }
+    { img: "assets/img/photos/village-trek.jpg", caption: "On the way to a village outreach" },
+    { img: "assets/img/photos/team-at-village-house.jpg", caption: "Outreach team in the village" },
+    { img: "assets/img/photos/bush-path.jpg", caption: "Walking the bush path with the Word" },
+    { img: "assets/img/photos/outreach-team.jpg", caption: "STS outreach team" },
+    { img: "assets/img/photos/harvest-day-2.jpg", caption: "STS Harvest, day 2" }
   ],
   site: {
   "theme": "THE ACT OF WITNESS",
@@ -1827,7 +1827,7 @@ async function saveCatalogItem() {
   const title = document.getElementById("cTitle").value.trim(), desc = document.getElementById("cDesc").value.trim();
   if (!title || !desc) return alert("Please enter a title and a description.");
   const old = editCat >= 0 ? appState.catalog[editCat] : null;
-  const img = await pickImage("cImgUrl", "cImgFile", old && old.img) || "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=800&q=80";
+  const img = await pickImage("cImgUrl", "cImgFile", old && old.img) || "assets/img/photos/outreach-team-800.jpg";
   const item = { title, category: document.getElementById("cType").value, img, desc };
   if (old) appState.catalog[editCat] = item; else appState.catalog.unshift(item);
   resetCatForm(); saveContent(); renderPublishStatus(); alert(DRAFT_SAVED_MSG);
