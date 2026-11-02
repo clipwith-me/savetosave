@@ -58,8 +58,5 @@ window.STS_CONFIG = {
   admin: {
     salt: "ad4fefd9d67e0518d074b2c5ccbc5fd7",
     hash: "d860733f7b8d1038a9c57fb8f7349ce9d131f033f854b0bf68dae34e516f8e98"
-  },
-
-  // The welcome popup shows at most once in this many days per visitor.
-  welcomePopupEveryDays: 3
+  }
 };

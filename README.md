@@ -72,7 +72,6 @@ Tips:
 | `ngnPerUsd` | Exchange rate used everywhere a Naira amount is shown. |
 | `conference`, `aprilOutreach` | Event dates in Nigerian time (WAT), used by the countdowns. |
 | `admin` | Password check for the admin backend (see below). |
-| `welcomePopupEveryDays` | How often the welcome popup may appear for the same visitor. |
 
 ### Changing the admin password
 

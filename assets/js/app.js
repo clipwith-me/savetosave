@@ -264,29 +264,13 @@ function toggleMobileMenu() {
   document.getElementById("mobileMenuIcon").className = "fa-solid " + (open ? "fa-xmark" : "fa-bars") + " text-xl";
 }
 
-// Hook Modal Controls
-const HOOK_SEEN_KEY = "sts_welcome_seen_at";
+// "Why $10 matters" popup: opens only when a visitor taps "See Impact" or the footer link.
 function openHookModal() {
   document.getElementById("hookPopupModal").classList.remove("hidden");
 }
 function closeHookModal() {
   document.getElementById("hookPopupModal").classList.add("hidden");
 }
-// The welcome popup interrupts reading, so show it at most once every few days,
-// and never to someone who followed a link straight to a section.
-function maybeShowWelcome() {
-  if (location.hash) return;
-  const days = Number(CONFIG.welcomePopupEveryDays) || 3;
-  let last = 0;
-  try { last = Number(localStorage.getItem(HOOK_SEEN_KEY)) || 0; } catch (e) {}
-  if (Date.now() - last < days * 864e5) return;
-  setTimeout(() => {
-    if (document.querySelector(".sts-modal:not(.hidden)")) return; // another dialog is already open
-    openHookModal();
-    try { localStorage.setItem(HOOK_SEEN_KEY, String(Date.now())); } catch (e) {}
-  }, 1500);
-}
-
 // Render Numbers, Catalog & Videos
 function renderAllUI() {
   document.getElementById("statSoulsDisplay").textContent = appState.souls;
@@ -2211,6 +2195,6 @@ async function initSite() {
   // Backend must open even if something else on the page fails to load
   const openIfAdmin = () => { if (location.hash === ADMIN_ROUTE) { try { openAdminModal(); } catch (e) { console.warn(e); } } };
   window.addEventListener("hashchange", openIfAdmin);
-  if (location.hash === ADMIN_ROUTE) openIfAdmin(); else maybeShowWelcome();
+  if (location.hash === ADMIN_ROUTE) openIfAdmin();
 }
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initSite); else initSite();

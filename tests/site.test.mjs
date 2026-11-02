@@ -7,8 +7,8 @@ import { setup, teardown, openSite, SHEET } from "./helpers.mjs";
 before(setup);
 after(teardown);
 
-// Skip the welcome popup unless a test is about it.
-const NO_POPUP = { sts_welcome_seen_at: String(Date.now()) };
+// No popup opens on its own any more; kept so tests can pass a storage seed.
+const NO_POPUP = {};
 
 async function fillRegistration(page, email, { hostel = "yes", days = "3" } = {}) {
   await page.click("text=Register as one of the 200 Missionaries");
@@ -192,15 +192,15 @@ test("a giving form that fails to send says so and keeps what was typed", async 
   await context.close();
 });
 
-test("the welcome popup shows once, then stays away", async () => {
+test("no popup appears on its own; the impact message opens only on request", async () => {
   const { page, context } = await openSite();
-  await page.waitForSelector("#hookPopupModal:not(.hidden)", { timeout: 4000 });
-  assert.equal(await page.evaluate(() => document.activeElement.closest("#hookPopupModal") !== null), true, "focus moves into the popup");
-  await page.keyboard.press("Escape");
+  await page.waitForTimeout(2500);
   assert.equal(await page.isVisible("#hookPopupModal"), false);
-  await page.reload();
-  await page.waitForFunction(() => document.querySelectorAll("#catalogGrid > *").length > 0);
-  await page.waitForTimeout(2000);
+  await page.click("text=See Impact");
+  await page.waitForSelector("#hookPopupModal:not(.hidden)");
+  // Focus moves in just after the popup opens.
+  await page.waitForFunction(() => document.activeElement && document.activeElement.closest("#hookPopupModal") !== null, null, { timeout: 2000 });
+  await page.keyboard.press("Escape");
   assert.equal(await page.isVisible("#hookPopupModal"), false);
   await context.close();
 });
