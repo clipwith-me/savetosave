@@ -32,7 +32,7 @@ const DEFAULT_CONTENT = {
     {
       title: "Ile-Ife & Osun Rural Crusade Invasion",
       category: "Crusades",
-      img: "assets/img/photos/harvest-day-2-800.jpg",
+      img: "assets/img/photos/village-preaching-800.jpg",
       desc: "3 nights of open-air Gospel power, 1,400+ decisions for Christ, and free village Bible distribution."
     },
     {
@@ -50,19 +50,19 @@ const DEFAULT_CONTENT = {
     {
       title: "Free Rural Medical & Welfare Outreach",
       category: "Medical & Welfare",
-      img: "assets/img/photos/team-at-village-house-800.jpg",
+      img: "assets/img/photos/praying-for-the-sick-800.jpg",
       desc: "Combining compassionate medical care, food bags, and one-on-one soul winning."
     },
     {
       title: "Northern Frontier Motorcycle Missionaries",
       category: "Village Invasions",
-      img: "assets/img/photos/bush-path-800.jpg",
+      img: "assets/img/photos/missionaries-resting-800.jpg",
       desc: "Every penny given fuels motorbikes taking Sent Ones into unreached nomadic settlements."
     },
     {
       title: "Youth & Campus Evangelism Fire",
       category: "Crusades",
-      img: "assets/img/photos/outreach-team-800.jpg",
+      img: "assets/img/photos/street-evangelism-800.jpg",
       desc: "Raising radical student witnesses and deploying them into streets and marketplaces."
     }
   ],
@@ -91,7 +91,12 @@ const DEFAULT_CONTENT = {
     { img: "assets/img/photos/team-at-village-house.jpg", caption: "Outreach team in the village" },
     { img: "assets/img/photos/bush-path.jpg", caption: "Walking the bush path with the Word" },
     { img: "assets/img/photos/outreach-team.jpg", caption: "STS outreach team" },
-    { img: "assets/img/photos/harvest-day-2.jpg", caption: "STS Harvest, day 2" }
+    { img: "assets/img/photos/harvest-day-2.jpg", caption: "STS Harvest, day 2" },
+    { img: "assets/img/photos/village-preaching.jpg", caption: "Preaching the Gospel in a village at dusk" },
+    { img: "assets/img/photos/street-evangelism.jpg", caption: "Street evangelism" },
+    { img: "assets/img/photos/praying-for-the-sick.jpg", caption: "Praying for the sick" },
+    { img: "assets/img/photos/home-visit.jpg", caption: "Visiting a family at home" },
+    { img: "assets/img/photos/missionaries-resting.jpg", caption: "Missionaries resting in the field" }
   ],
   site: {
   "theme": "THE ACT OF WITNESS",
