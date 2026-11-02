@@ -310,3 +310,21 @@ test("every popup fits a small phone screen and can be closed", async () => {
   assert.deepEqual(log.errors, []);
   await context.close();
 });
+
+test("hero background is a slideshow that loads photos only when needed", async () => {
+  const { page, context, log } = await openSite({ storage: NO_POPUP });
+  const state = () => page.evaluate(() => [...document.querySelectorAll("#heroSlides .hero-slide")].map(s => ({ active: s.classList.contains("is-active"), loaded: !!s.getAttribute("src") })));
+  let s = await state();
+  assert.equal(s.length, 6);
+  assert.equal(s[0].active, true);
+  assert.equal(s[4].loaded, false, "later photos are not downloaded up front");
+  assert.equal(await page.locator("#heroDots .hero-dot").count(), 6);
+  await page.click("#heroDots .hero-dot >> nth=3");
+  s = await state();
+  assert.equal(s[3].active && s[3].loaded, true);
+  assert.equal(s[4].loaded, true, "the next photo is warmed up");
+  assert.equal(s.filter(x => x.active).length, 1);
+  assert.equal(await page.getAttribute("#heroDots .hero-dot >> nth=3", "aria-current"), "true");
+  assert.deepEqual(log.errors, []);
+  await context.close();
+});

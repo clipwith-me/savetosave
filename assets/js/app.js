@@ -2088,6 +2088,38 @@ function countUp(el) {
   requestAnimationFrame(step);
 }
 
+// ---------- Hero background slideshow ----------
+// Cross-fades the hero photos every few seconds. Each photo is fetched only just
+// before it is shown (saving mobile data), it pauses while the tab is hidden, and
+// the dots let visitors pick a photo. With reduced motion it changes without the zoom.
+const HERO_SLIDE_MS = 6000;
+function setupHeroSlides() {
+  const slides = [...document.querySelectorAll("#heroSlides .hero-slide")];
+  const dotsBox = document.getElementById("heroDots");
+  if (slides.length < 2 || !dotsBox) return;
+  let current = 0, timer = null;
+  const load = img => {
+    if (img.dataset.srcset) { img.srcset = img.dataset.srcset; delete img.dataset.srcset; }
+    if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; }
+  };
+  dotsBox.innerHTML = slides.map((_, i) => `<button type="button" class="hero-dot${i ? "" : " is-active"}" aria-label="Photo ${i + 1} of ${slides.length}"${i ? "" : ' aria-current="true"'}></button>`).join("");
+  const dots = [...dotsBox.children];
+  const show = i => {
+    current = (i + slides.length) % slides.length;
+    load(slides[current]);
+    load(slides[(current + 1) % slides.length]); // warm up the next one
+    slides.forEach((s, k) => s.classList.toggle("is-active", k === current));
+    dots.forEach((d, k) => { d.classList.toggle("is-active", k === current); if (k === current) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current"); });
+  };
+  const start = () => { stop(); timer = setInterval(() => show(current + 1), HERO_SLIDE_MS); };
+  const stop = () => { if (timer) clearInterval(timer); timer = null; };
+  dots.forEach((d, k) => d.addEventListener("click", () => { show(k); start(); }));
+  document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
+  // Fetch the second photo once the page has settled, then start rotating.
+  window.addEventListener("load", () => load(slides[1]), { once: true });
+  start();
+}
+
 function setupMotion() {
   const header = document.getElementById("siteHeader");
   const cta = document.querySelector(".mobile-cta");
@@ -2149,6 +2181,7 @@ async function initSite() {
   renderAllUI();
   paintDraftBadge();
   setupMotion();
+  setupHeroSlides();
   highlightGivingCards(document.getElementById("giveCategoryInput").value);
   refreshSharedCounts();
   if (location.hash && location.hash !== ADMIN_ROUTE) setTimeout(() => goTo(location.hash), 300);
