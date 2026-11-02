@@ -2113,7 +2113,7 @@ function setupMotion() {
   document.documentElement.classList.add("js-reveal");
   const targets = [
     ".sec-title", ".sts-hub-head", "#hook-section .grid > div", "#events .grid > div", ".give-cat-card",
-    "#giving .lg\\:col-span-5", "#partner figure", "#training .grid > div", "#about .grid > div", ".footer-cta", "#gospel-map .grid > div"
+    "#giving .lg\\:col-span-5", "#partner figure", "#training .grid > div", "#about .about-card", ".footer-cta", "#gospel-map .grid > div"
   ];
   document.querySelectorAll(targets.join(",")).forEach((el, i) => {
     el.classList.add("reveal");
