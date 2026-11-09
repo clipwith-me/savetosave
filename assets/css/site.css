@@ -228,3 +228,36 @@ html.modal-open,html.modal-open body{overflow:hidden}
 @supports not (height:100dvh){.modal-panel{max-height:calc(100vh - 2rem)}}
 .modal-scroll{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 .sts-modal > div{overscroll-behavior:contain}
+
+/* ===== Mobile: every screen from 320px up =====
+   Found by an automated check at 320, 360, 390, 414, 768 and 1024px wide. */
+/* Long button labels wrap instead of pushing the page wider than the screen. */
+.btn{white-space:normal;text-align:center;line-height:1.3}
+.btn-sm{white-space:nowrap}
+.grid > *{min-width:0}
+@media(max-width:380px){.countdown{gap:1rem}.event-card{padding:1.5rem}.card.p-6{padding:1.25rem}.give-cat-card{padding:.9rem 1rem}.partner-band{padding:1.75rem 1.25rem}.contact-list{padding:.25rem 1rem}}
+/* Thumb-sized tap targets (at least 40px). */
+.amt-chip,.cur-btn,#pledgeChips button,#modalPledgeChips button{min-height:40px}
+.btn-xs{padding:.45rem .95rem;min-height:40px}
+.sts-modal button[aria-label="Close"]{flex-shrink:0;min-width:40px;min-height:40px}
+.hero-dot{position:relative}
+.hero-dot::before{content:"";position:absolute;inset:-16px -6px}
+#adminModal input:not([type=file]):not([type=checkbox]),#adminModal select,#adminModal button{min-height:40px}
+/* No text smaller than 12px on screen. */
+.text-\[11px\],.text-\[10px\]{font-size:.75rem!important;line-height:1.35!important}
+.countdown span{font-size:.75rem}
+/* The invoice reads comfortably on a phone and its stamp stays on screen. */
+@media(max-width:520px){
+  .inv-sign{flex-wrap:wrap}
+  .inv-stamp{width:92px;height:92px}
+  .inv-ticket-top,.inv-ticket-id,.inv-ticket-sub,.inv-seatbox span,.inv-seatbox small,.inv-org2,.inv-sec-title{font-size:11px}
+}
+@media(max-width:400px){.bank > div{grid-template-columns:1fr;gap:.15rem}}
+.btn-sm{min-height:40px}
+.contact-value{display:inline-flex;align-items:center;min-height:40px}
+.footer-link{display:inline-flex;align-items:center;min-height:40px}
+#adminModal button{min-width:40px}
+.footer-link{min-width:44px}
+.inv-ticket-top,.inv-ticket-id,.inv-ticket-sub,.inv-seatbox span,.inv-seatbox small{font-size:11px}
+.brand-name{white-space:nowrap}
+@media(max-width:400px){.brand-sub{display:none}.site-header .px-5{padding-left:1rem;padding-right:1rem}}

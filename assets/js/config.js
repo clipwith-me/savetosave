@@ -20,7 +20,7 @@ window.STS_CONFIG = {
   //  - conference registration still issues temporary TEST numbers when the
   //    numbering service cannot be reached.
   // Set to false before the real launch (see docs/LAUNCH_CHECKLIST.md).
-  testMode: true,
+  testMode: false,
 
   // SHARED DATABASE (Google Sheet + Apps Script, see backend/README.md).
   // Paste the Web app URL (ends in /exec). While empty, the site falls back to

@@ -4,7 +4,7 @@ Work through this before sharing the link widely (church announcements, WhatsApp
 
 ## Must do
 
-- [ ] **Turn test mode off.** Set `testMode: false` in `assets/js/config.js`. The yellow "TEST RUN: nothing here is final" badge currently shows to every visitor.
+- [x] **Turn test mode off.** Done: `testMode: false` in `assets/js/config.js`. If the numbering service is unreachable, registrations now go to the ministry inbox marked PENDING instead of getting temporary test numbers.
 - [ ] **Connect the Google Sheet backend** (`backend/README.md`) and set `sheetUrl`. Without it, seat numbers come from a public counter that anyone can reset or fill, and duplicate registrations cannot be detected.
 - [ ] **Reset the counters after testing.** Admin backend > "Reset registration counters", so the first real person gets seat 11.
 - [ ] **Activate FormSubmit.** Submit any form once and confirm the activation email sent to `stsglobaloutreach@gmail.com`. Until then, no form email is delivered.

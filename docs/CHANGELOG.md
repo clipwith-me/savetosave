@@ -1,5 +1,11 @@
 # Change log
 
+## 2026-11: live mode and mobile pass
+
+- **Test mode is off:** no "TEST RUN" badge. If the seat numbering service is down, registrations go to the ministry as PENDING rather than getting temporary numbers.
+- **Checked on every screen size** from 320px phones to laptops, for the page and every popup. Fixed: the Give section was wider than small phones; long button labels now wrap; every button and link is at least 40px to tap; no text under 12px (11px on the printable invoice); the invoice stamp fits; the header name stays on one line on small phones; the bank details stack on narrow screens.
+- A new automated test (`tests/responsive.test.mjs`) repeats this check on every change.
+
 ## 2026-11: simple redesign (client request)
 
 - **Light, calm design:** warm white pages, near-black text, STS red only for actions. The dark-red theme, glows and the moving banner are gone.

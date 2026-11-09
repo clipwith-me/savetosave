@@ -50,12 +50,12 @@
 
   <!-- HEADER -->
   <header id="siteHeader" class="site-header sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-5 h-[4.5rem] flex items-center justify-between gap-6">
+    <div class="max-w-6xl mx-auto px-5 h-[4.5rem] flex items-center justify-between gap-3">
       <a href="#home" class="flex items-center gap-3" aria-label="Saved To Be Sent, back to top">
         <span class="w-9 h-12 bg-stsRed rounded-md p-1.5 shrink-0"><img src="assets/img/logo.png" alt="" width="212" height="292" class="w-full h-full object-contain" /></span>
         <span class="leading-tight">
-          <span class="block font-display font-bold text-[1.05rem] text-stsInk">Saved To Be Sent</span>
-          <span class="block text-[0.7rem] font-semibold tracking-[0.18em] uppercase text-gray-500">Mission Outreach</span>
+          <span class="brand-name block font-display font-bold text-[1.05rem] text-stsInk">Saved To Be Sent</span>
+          <span class="brand-sub block text-xs font-semibold tracking-[0.16em] uppercase text-gray-500">Mission Outreach</span>
         </span>
       </a>
       <nav class="hidden lg:flex items-center gap-7 text-[0.92rem] font-semibold" aria-label="Main">
@@ -263,7 +263,7 @@
               <div><dt>Account no.</dt><dd class="flex items-center justify-between gap-2"><span id="acctNumDisplay" class="text-lg font-bold tracking-wider text-stsInk">0054212216</span><button type="button" onclick="copyAcctNumber()" class="btn btn-outline btn-xs">Copy</button></dd></div>
             </dl>
             <button type="button" onclick="openAccountModal(document.getElementById('giveCategoryInput').value)" class="btn btn-red w-full justify-center mt-5">Card, Paystack, Stripe or crypto</button>
-            <a id="cryptoGiveBtn" href="#" target="_blank" rel="noopener" class="block text-center text-sm font-semibold text-gray-500 hover:text-stsRed mt-3">Give in cryptocurrency (USDT) via WhatsApp</a>
+            <a id="cryptoGiveBtn" href="#" target="_blank" rel="noopener" class="block text-center text-sm font-semibold text-gray-500 hover:text-stsRed mt-2 py-2.5">Give in cryptocurrency (USDT) via WhatsApp</a>
           </div>
 
           <form id="giveForm" onsubmit="submitDonationForm(event)" class="card p-6 space-y-4">

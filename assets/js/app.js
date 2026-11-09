@@ -552,7 +552,7 @@ function renderGallery() {
     <button type="button" onclick="openLightbox(${i})" aria-label="Open photo: ${esc(g.caption || "Outreach photo")}" class="group relative aspect-square overflow-hidden rounded-xl border border-black/10 hover:border-stsRed transition">
       <img src="${esc(safeImg(g.img))}" alt="${esc(g.caption || 'Outreach photo')}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
       <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-2.5 text-left">
-        <span class="text-[11px] sm:text-xs font-semibold text-white kw">${esc(g.caption || '')}</span>
+        <span class="text-xs sm:text-sm font-semibold text-white">${esc(g.caption || '')}</span>
       </div>
     </button>
   `).join('');

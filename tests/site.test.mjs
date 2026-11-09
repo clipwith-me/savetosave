@@ -146,11 +146,30 @@ test("registration with the public counter, and offline test numbers", async () 
   await context.close();
 
   // Counter unreachable while testMode is on: temporary numbers, clearly labelled.
-  const offline = await openSite({ counter: () => null, storage: NO_POPUP });
+  const offline = await openSite({ config: { testMode: true }, counter: () => null, storage: NO_POPUP });
   await fillRegistration(offline.page, "offline@example.com");
   assert.match(await offline.page.textContent("#invoiceSheet"), /TEST-MC27-001/);
   assert.match(await offline.page.textContent("#invoiceNotice"), /TEST RUN/);
   await offline.context.close();
+});
+
+test("live site: if numbering is down, the registration goes to the ministry as PENDING, with no fake seat", async () => {
+  const { page, context, log } = await openSite({ counter: () => null, storage: NO_POPUP });
+  assert.equal(await page.locator("#testBadge").count(), 0, "no TEST RUN badge on the live site");
+  await page.click("text=Register for the conference");
+  await page.fill("#regFullName", "Ada Obi");
+  await page.fill("#regEmail", "pending@example.com");
+  await page.fill("#regPhone", "+2348011111111");
+  await page.fill("#regLocation", "Ibadan");
+  await page.selectOption("#regDays", "3");
+  await page.selectOption("#regHostel", "yes");
+  await page.selectOption("#regHeard", "WhatsApp");
+  await page.click("#regSubmitBtn");
+  await page.waitForFunction(() => !document.getElementById("regSubmitBtn").disabled, null, { timeout: 30000 });
+  assert.equal(await page.isVisible("#invoiceModal"), false, "no invoice with made-up numbers");
+  assert.ok(log.formsubmit.some(f => /PENDING Conference Registration/.test(f.body || "")), "ministry was told to assign a seat");
+  assert.match(log.lastDialog, /our team will send your seat number/);
+  await context.close();
 });
 
 test("spam bots filling the hidden field are dropped silently", async () => {
