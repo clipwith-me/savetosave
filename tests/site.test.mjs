@@ -11,7 +11,7 @@ after(teardown);
 const NO_POPUP = {};
 
 async function fillRegistration(page, email, { hostel = "yes", days = "3" } = {}) {
-  await page.click("text=Register as one of the 200 Missionaries");
+  await page.click("text=Register for the conference");
   await page.fill("#regFullName", "Ada Obi");
   await page.fill("#regEmail", email);
   await page.fill("#regPhone", "+2348011111111");
@@ -28,7 +28,7 @@ test("home page renders with no script errors", async () => {
   assert.equal(await page.locator("#catalogGrid > div").count(), 6);
   assert.equal(await page.locator("[data-ngn]").first().textContent(), "₦14,000", "Naira copy follows the configured rate");
   assert.match(await page.textContent("#confDays"), /^\d{2,}$/, "countdown is zero-padded");
-  assert.match(await page.textContent("#videoGrid"), /Outreach videos are on their way/, "no placeholder videos");
+  assert.equal(await page.isHidden("#videos"), true, "videos block stays hidden until real videos are added");
   assert.equal(await page.locator("#draftBadge").count(), 0);
   assert.deepEqual(log.errors, []);
   await context.close();
@@ -58,9 +58,8 @@ test("published content.json reaches visitors, and is escaped", async () => {
   assert.equal(await page.textContent("#statSoulsDisplay"), "5,123+");
   assert.match(await page.textContent("#catalogGrid"), /<img src=x onerror=window.__xss=1>Crusade/, "shown as text");
   assert.equal(await page.locator("#catalogGrid img").count(), 0, "unsafe image link dropped");
-  assert.match(await page.textContent("#listAfricaReached"), /<script>/);
   assert.equal(await page.locator(".yt-facade").count(), 1, "only the valid YouTube link is shown");
-  await page.click(".sts-tab[data-t='videos']");
+  assert.equal(await page.isVisible("#videos"), true, "videos block shows once there is a real video");
   await page.click(".yt-facade");
   assert.match(await page.getAttribute("#videoGrid iframe", "src"), /^https:\/\/www\.youtube-nocookie\.com\/embed\/abcdefghijk\?/);
   assert.equal(await page.evaluate(() => window.__xss), undefined);
@@ -123,7 +122,7 @@ test("conference registration through the Google Sheet backend", async () => {
 
 test("a full conference is reported and no invoice is issued", async () => {
   const { page, context, log } = await openSite({ config: { sheetUrl: SHEET }, sheet: b => (b.action === "register" ? { full: true } : { ok: true }), storage: NO_POPUP });
-  await page.click("text=Register as one of the 200 Missionaries");
+  await page.click("text=Register for the conference");
   await page.fill("#regFullName", "Late Person");
   await page.fill("#regEmail", "late@example.com");
   await page.fill("#regPhone", "+2348000000000");
@@ -160,7 +159,7 @@ test("spam bots filling the hidden field are dropped silently", async () => {
   await page.fill("#prayContact", "bot@example.com");
   await page.fill("#prayMessage", "buy now");
   await page.evaluate(() => { document.querySelector("#prayer input[name=website]").value = "http://spam.example"; });
-  await page.click("text=Send Prayer Request to Altar");
+  await page.click("text=Send prayer request");
   await page.waitForTimeout(300);
   assert.equal(log.formsubmit.length, 0);
 
@@ -168,7 +167,7 @@ test("spam bots filling the hidden field are dropped silently", async () => {
   await page.fill("#prayName", "Real Person");
   await page.fill("#prayContact", "real@example.com");
   await page.fill("#prayMessage", "Please pray for my family");
-  await page.click("text=Send Prayer Request to Altar");
+  await page.click("text=Send prayer request");
   await page.waitForFunction(() => document.getElementById("prayName").value === "");
   assert.equal(log.formsubmit.length, 1);
   assert.match(log.lastDialog, /prayer request has been received/);
@@ -196,7 +195,7 @@ test("no popup appears on its own; the impact message opens only on request", as
   const { page, context } = await openSite();
   await page.waitForTimeout(2500);
   assert.equal(await page.isVisible("#hookPopupModal"), false);
-  await page.click("text=See Impact");
+  await page.click("footer >> text=Why $10 matters");
   await page.waitForSelector("#hookPopupModal:not(.hidden)");
   // Focus moves in just after the popup opens.
   await page.waitForFunction(() => document.activeElement && document.activeElement.closest("#hookPopupModal") !== null, null, { timeout: 2000 });
@@ -216,17 +215,6 @@ test("giving cards work from the keyboard", async () => {
   await page.keyboard.press("Escape");
   assert.equal(await page.isVisible("#accountModal"), false);
   assert.equal(await page.evaluate(() => document.activeElement.classList.contains("give-cat-card")), true, "focus returns to the card");
-  await context.close();
-});
-
-test("the map loads only when its tab is opened", async () => {
-  const { page, context } = await openSite({ storage: NO_POPUP });
-  assert.equal(await page.evaluate(() => typeof window.L), "undefined");
-  await page.click(".sts-tab[data-t='gospel-map']");
-  await page.waitForFunction(() => window.mapInstance || (typeof mapInstance !== "undefined" && mapInstance));
-  assert.equal(await page.evaluate(() => mapMarkers.length), 12);
-  await page.click("[data-region='AFRICA_UNREACHED']");
-  await page.waitForFunction(() => mapMarkers.length === 4);
   await context.close();
 });
 
@@ -271,8 +259,8 @@ test("with motion on, numbers count up to the published value and sections revea
   const { page, context, log } = await openSite({ motion: true, content: { souls: "5,123+" }, storage: NO_POPUP });
   await page.waitForFunction(() => document.getElementById("statSoulsDisplay").textContent === "5,123+", null, { timeout: 5000 });
   assert.equal(await page.evaluate(() => document.documentElement.classList.contains("js-reveal")), true);
-  await page.evaluate(() => goTo("#about"));
-  await page.waitForFunction(() => document.querySelector("#about .sec-title").classList.contains("in"), null, { timeout: 5000 });
+  await page.evaluate(() => goTo("#events"));
+  await page.waitForFunction(() => document.querySelector("#events .sec-head").classList.contains("in"), null, { timeout: 5000 });
   await page.evaluate(() => window.scrollTo(0, 2000));
   await page.waitForFunction(() => document.getElementById("siteHeader").classList.contains("is-scrolled"));
   assert.deepEqual(log.errors, []);

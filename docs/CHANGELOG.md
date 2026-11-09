@@ -1,5 +1,13 @@
 # Change log
 
+## 2026-11: simple redesign (client request)
+
+- **Light, calm design:** warm white pages, near-black text, STS red only for actions. The dark-red theme, glows and the moving banner are gone.
+- **Shorter page in one clear order:** hero slideshow, impact numbers, who we are, events, our work, give & monthly partners, get involved (training + prayer), contact, footer.
+- **Removed:** the top announcement bar, the "How your $10..." cards, the section tabs, the Gospel map, the empty videos block (it appears automatically once real YouTube links are added) and the floating phone bar.
+- **Giving in three steps:** choose a purpose, send your gift (bank details and other payment options), tell us you gave.
+- All features work as before: registration with seat numbers and invoices, the forms, the admin backend and publishing.
+
 ## 2026-10: visual redesign
 
 - **Hero:** full-screen with the photo visible, a large title-case headline with a red italic accent, glowing pill buttons, glass impact cards that count up, and a tilted donation card showing "$10 = 1 Bible".

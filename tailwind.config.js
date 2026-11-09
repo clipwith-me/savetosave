@@ -9,8 +9,9 @@ module.exports = {
       colors: {
         stsRed: "#E60000",
         stsDarkRed: "#990000",
-        stsObsidian: "#0A0A0D",
-        stsCard: "#14151B",
+        stsInk: "#16161A",
+        stsObsidian: "#F6F4F0",
+        stsCard: "#FFFFFF",
         stsGold: "#F59E0B"
       },
       fontFamily: {

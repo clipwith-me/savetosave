@@ -48,1015 +48,374 @@
   <a href="#main" class="skip-link">Skip to main content</a>
   <noscript><div class="bg-amber-50 text-amber-900 text-sm text-center p-3">Some parts of this site (giving options, registration, the map) need JavaScript. Please turn it on, or contact us on +234 913 627 9311.</div></noscript>
 
-  <!-- TOP NOTIFICATION HOOK BAR (one line on phones, full message from tablet up) -->
-  <div class="topbar text-white text-xs sm:text-sm py-2 px-4">
-    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
-      <p class="font-semibold flex items-center gap-2 min-w-0">
-        <span class="hidden sm:inline bg-white text-stsRed font-extrabold px-2 py-0.5 rounded text-[11px] uppercase tracking-wider shrink-0">Did You Know?</span>
-        <span id="topBarHookText" class="hidden md:inline truncate">Your $10 or more puts a Bible in an unreached village, and your penny sends missionaries to isolated souls!</span>
-        <span class="md:hidden truncate"><i class="fa-solid fa-book-bible mr-1" aria-hidden="true"></i>$10 puts a Bible in an unreached village</span>
-      </p>
-      <div class="flex items-center gap-3 shrink-0">
-        <a href="#giving" class="underline font-bold hover:text-black transition">Give &rarr;</a>
-        <button onclick="openHookModal()" class="hidden sm:inline-block bg-black/30 hover:bg-black/50 px-2.5 py-1 rounded text-xs font-semibold">See Impact</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- STICKY NAVIGATION BAR (Responsive Desktop + Mobile Drawer) -->
+  <!-- HEADER -->
   <header id="siteHeader" class="site-header sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <!-- Official STS Logo -->
-      <a href="#home" class="flex items-center gap-3 group" aria-label="Saved To Be Sent, back to top">
-        <div class="w-11 h-14 bg-stsRed rounded-md p-1.5 shadow-lg shadow-stsRed/30 border border-black/15 shrink-0"><img src="assets/img/logo.png" alt="" width="212" height="292" class="w-full h-full object-contain" /></div>
-        <div>
-          <span class="font-display font-bold text-base sm:text-lg tracking-wide block leading-none text-white">Saved To Be Sent</span>
-          <span class="font-script text-stsRed text-lg sm:text-xl leading-none">Saved to save™</span>
-        </div>
+    <div class="max-w-6xl mx-auto px-5 h-[4.5rem] flex items-center justify-between gap-6">
+      <a href="#home" class="flex items-center gap-3" aria-label="Saved To Be Sent, back to top">
+        <span class="w-9 h-12 bg-stsRed rounded-md p-1.5 shrink-0"><img src="assets/img/logo.png" alt="" width="212" height="292" class="w-full h-full object-contain" /></span>
+        <span class="leading-tight">
+          <span class="block font-display font-bold text-[1.05rem] text-stsInk">Saved To Be Sent</span>
+          <span class="block text-[0.7rem] font-semibold tracking-[0.18em] uppercase text-gray-500">Mission Outreach</span>
+        </span>
       </a>
-
-      <!-- Desktop Navigation Links -->
-      <nav class="hidden lg:flex items-center gap-5 text-sm font-semibold text-gray-600" aria-label="Main">
-        <a href="#home" class="hover:text-stsRed transition">Home</a>
-        <a href="#events" class="hover:text-stsRed transition">2027 Events</a>
-        <a href="#catalog" class="hover:text-stsRed transition">Our Work & Impact</a>
-        <a href="#giving" class="hover:text-stsRed transition">Give & Partner</a>
-        <a href="#training" class="hover:text-stsRed transition">Join, Train & Pray</a>
-        <a href="#about" class="hover:text-stsRed transition">About & Contact</a>
+      <nav class="hidden lg:flex items-center gap-7 text-[0.92rem] font-semibold" aria-label="Main">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#events" class="nav-link">Events</a>
+        <a href="#work" class="nav-link">Our Work</a>
+        <a href="#involved" class="nav-link">Get Involved</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </nav>
-
-      <!-- Action Buttons -->
-      <div class="hidden sm:flex items-center gap-3">
-        <a href="#giving" class="bg-stsRed hover:bg-red-700 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-lg shadow-lg shadow-stsRed/30 transition">
-          <i class="fa-solid fa-heart mr-1.5"></i>Give Now
-        </a>
+      <div class="flex items-center gap-2">
+        <a href="#giving" class="btn btn-red btn-sm">Give</a>
+        <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="lg:hidden w-11 h-11 rounded-full flex items-center justify-center text-stsInk hover:bg-black/5" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
+          <i id="mobileMenuIcon" class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
+        </button>
       </div>
-
-      <!-- Mobile Hamburger Button -->
-      <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="lg:hidden text-gray-900 p-2 rounded-lg bg-black/5 hover:bg-black/10" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
-        <i id="mobileMenuIcon" class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
-      </button>
     </div>
-
-    <!-- Mobile Responsive Navigation Drawer -->
-    <nav id="mobileMenu" class="hidden lg:hidden bg-stsCard border-b border-black/10 px-4 pt-3 pb-6 space-y-2" aria-label="Mobile">
-      <a href="#home" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-black/5 font-semibold text-sm">🏠 Home</a>
-      <a href="#events" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-black/5 font-semibold text-sm">📅 2027 Events</a>
-      <a href="#catalog" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-black/5 font-semibold text-sm">📸 Our Work & Impact</a>
-      <a href="#giving" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-black/5 font-semibold text-sm">💝 Give & Partner</a>
-      <a href="#training" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-black/5 font-semibold text-sm">🎓 Join, Train & Pray</a>
-      <a href="#about" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-black/5 font-semibold text-sm">ℹ️ About & Contact</a>
-      <div class="pt-3 flex gap-2">
-        <a href="#giving" onclick="toggleMobileMenu()" class="flex-1 bg-stsRed text-center py-2.5 rounded-lg font-bold text-sm">Give Now</a>
-      </div>
+    <nav id="mobileMenu" class="hidden lg:hidden border-t border-black/10 bg-white px-5 py-3" aria-label="Mobile">
+      <a href="#about" onclick="toggleMobileMenu()" class="mobile-link">About</a>
+      <a href="#events" onclick="toggleMobileMenu()" class="mobile-link">Events</a>
+      <a href="#work" onclick="toggleMobileMenu()" class="mobile-link">Our Work</a>
+      <a href="#involved" onclick="toggleMobileMenu()" class="mobile-link">Get Involved</a>
+      <a href="#contact" onclick="toggleMobileMenu()" class="mobile-link">Contact</a>
+      <a href="#giving" onclick="toggleMobileMenu()" class="btn btn-red w-full justify-center mt-3">Give</a>
     </nav>
   </header>
 
   <main id="main">
-  <!-- HERO SECTION -->
+  <!-- HERO: photo slideshow, one message, two actions -->
   <section id="home" class="hero relative overflow-hidden text-white">
-    <!-- Background: the photo now shows through instead of sitting under a near-black overlay -->
-    <div class="absolute inset-0 z-0" aria-hidden="true">
-      <!-- Background slideshow. Only the first photo loads with the page; app.js loads each next one just before it shows. -->
+    <div class="absolute inset-0" aria-hidden="true">
+      <!-- Only the first photo loads with the page; app.js loads each next one just before it shows. -->
       <div id="heroSlides" class="hero-slides">
-        <img src="assets/img/photos/village-trek.jpg" srcset="assets/img/photos/village-trek-800.jpg 800w, assets/img/photos/village-trek.jpg 1600w" sizes="100vw" alt="" fetchpriority="high" class="hero-slide is-active" style="object-position:65% 30%" />
+        <img src="assets/img/photos/village-trek.jpg" srcset="assets/img/photos/village-trek-800.jpg 800w, assets/img/photos/village-trek.jpg 1600w" sizes="100vw" alt="" fetchpriority="high" class="hero-slide is-active" style="object-position:60% 30%" />
         <img data-src="assets/img/photos/village-preaching.jpg" data-srcset="assets/img/photos/village-preaching-800.jpg 800w, assets/img/photos/village-preaching.jpg 1600w" sizes="100vw" alt="" class="hero-slide" style="object-position:50% 40%" />
         <img data-src="assets/img/photos/street-evangelism.jpg" data-srcset="assets/img/photos/street-evangelism-800.jpg 800w, assets/img/photos/street-evangelism.jpg 1600w" sizes="100vw" alt="" class="hero-slide" style="object-position:50% 35%" />
         <img data-src="assets/img/photos/outreach-team.jpg" data-srcset="assets/img/photos/outreach-team-800.jpg 800w, assets/img/photos/outreach-team.jpg 1600w" sizes="100vw" alt="" class="hero-slide" style="object-position:50% 45%" />
         <img data-src="assets/img/photos/bush-path.jpg" data-srcset="assets/img/photos/bush-path-800.jpg 800w, assets/img/photos/bush-path.jpg 1600w" sizes="100vw" alt="" class="hero-slide" style="object-position:50% 50%" />
         <img data-src="assets/img/photos/team-at-village-house.jpg" data-srcset="assets/img/photos/team-at-village-house-800.jpg 800w, assets/img/photos/team-at-village-house.jpg 1600w" sizes="100vw" alt="" class="hero-slide" style="object-position:50% 40%" />
       </div>
-      <div class="hero-shade absolute inset-0"></div>
-      <div class="hero-glow hero-glow-1"></div>
-      <div class="hero-glow hero-glow-2"></div>
+      <div class="hero-shade"></div>
     </div>
-
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 sm:pt-16 lg:pt-14 lg:pb-20">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <div class="lg:col-span-7 space-y-7 text-center lg:text-left">
-          <div class="hero-pill inline-flex items-center gap-2.5">
-            <span class="relative flex w-2.5 h-2.5"><span class="absolute inline-flex w-full h-full rounded-full bg-stsRed opacity-75 animate-ping"></span><span class="relative inline-flex w-2.5 h-2.5 rounded-full bg-stsRed"></span></span>
-            Global Evangelism &amp; Village Outreach
-          </div>
-          <h1 id="heroTitleDisplay" class="hero-title font-display">
-            Saved to be <em class="hero-accent">sent.</em><br />
-            Reaching the unreached.
-          </h1>
-          <p id="heroSubDisplay" class="text-white/85 text-lg sm:text-xl max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-            Taking the fire of the Gospel across unreached African villages, Asian frontiers, streets, and campuses. Every soul matters. Every seed sends the Word.
-          </p>
-
-          <div class="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-3 pt-1">
-            <a href="#giving" class="btn-primary">
-              <i class="fa-solid fa-book-bible" aria-hidden="true"></i> Give $10 for a Village Bible
-            </a>
-            <a href="#events" class="btn-glass">
-              <i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Register for Conference 2027
-            </a>
-          </div>
-
-          <!-- Impact numbers (editable in the admin backend); they count up when they come into view -->
-          <dl class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
-            <div class="stat-glass">
-              <dd id="statSoulsDisplay" class="stat-num" data-countup>4,000+</dd>
-              <dt class="stat-label">Souls Saved</dt>
-            </div>
-            <div class="stat-glass">
-              <dd id="statBiblesDisplay" class="stat-num" data-countup>2,500+</dd>
-              <dt class="stat-label">Bibles Given</dt>
-            </div>
-            <div class="stat-glass">
-              <dd id="statVillagesDisplay" class="stat-num" data-countup>15+</dd>
-              <dt class="stat-label">Villages Reached</dt>
-            </div>
-            <div class="stat-glass">
-              <dd id="statMissionariesDisplay" class="stat-num" data-countup>40+</dd>
-              <dt class="stat-label">Missionaries Sent</dt>
-            </div>
-          </dl>
-        </div>
-
-        <!-- Floating donation card -->
-        <div class="lg:col-span-5">
-          <div class="hook-card">
-            <div class="relative h-56 sm:h-64 overflow-hidden">
-              <img src="assets/img/photos/team-at-village-house-800.jpg" alt="The STS outreach team in front of a village house" decoding="async" class="w-full h-full object-cover object-[50%_45%] hook-card-img" />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#14151B] via-[#14151B]/20 to-transparent"></div>
-              <span class="absolute top-4 left-4 inline-flex items-center gap-1.5 bg-stsRed text-white text-[11px] font-extrabold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-lg">
-                <i class="fa-solid fa-bolt" aria-hidden="true"></i> Urgent Mission Call
-              </span>
-              <div class="absolute bottom-4 left-5 right-5 flex items-end justify-between">
-                <div>
-                  <div class="text-4xl font-extrabold leading-none">$10</div>
-                  <div class="text-xs uppercase tracking-widest text-white/80 mt-1">= 1 Bible delivered</div>
-                </div>
-                <div class="text-right text-xs text-white/80">or <span data-ngn="10" class="font-bold text-white">₦14,000</span></div>
-              </div>
-            </div>
-            <div class="p-6 sm:p-7 space-y-4">
-              <h2 id="cardHookTitle" class="font-display text-2xl font-bold text-white leading-snug">
-                Your <span class="text-stsRed">$10</span> puts God's Word in an unreached home.
-              </h2>
-              <p id="cardHookSub" class="text-white/70 text-sm leading-relaxed">
-                And every <strong class="text-white">penny</strong> pushes missionaries deeper into villages where Christ has never been named.
-              </p>
-              <div class="grid grid-cols-2 gap-3 pt-1">
-                <button onclick="selectFundAndScroll('Bibles for Unreached Areas ($10/Bible)')" class="btn-primary btn-sm justify-center">
-                  Give for Bibles
-                </button>
-                <button onclick="selectFundAndScroll('Missionary Support in the Field')" class="btn-glass btn-sm justify-center">
-                  Send a Missionary
-                </button>
-              </div>
-            </div>
-          </div>
+    <div class="relative z-10 max-w-6xl mx-auto px-5 w-full">
+      <div class="max-w-2xl">
+        <p class="hero-kicker">Saved To Be Sent Mission Outreach</p>
+        <h1 id="heroTitleDisplay" class="hero-title font-display">Saved to be sent.<br />Reaching the unreached.</h1>
+        <p id="heroSubDisplay" class="hero-sub">Taking the Gospel, Bibles and missionaries into unreached villages across Africa and Asia.</p>
+        <div class="flex flex-col sm:flex-row gap-3 mt-9">
+          <a href="#giving" class="btn btn-red btn-lg justify-center">Give a $10 Bible</a>
+          <a href="#events" class="btn btn-light-outline btn-lg justify-center">Conference 2027</a>
         </div>
       </div>
     </div>
-
     <div id="heroDots" class="hero-dots" role="group" aria-label="Choose background photo"></div>
-    <a href="#hook-section" class="scroll-cue hidden lg:flex" aria-label="Scroll to learn more"><span></span></a>
   </section>
 
-  <!-- Moving band of what every gift does -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>Bibles for the unreached</span><i class="fa-solid fa-cross"></i>
-      <span>Missionaries sent</span><i class="fa-solid fa-cross"></i>
-      <span>Village crusades</span><i class="fa-solid fa-cross"></i>
-      <span>Gospel tracts in local dialects</span><i class="fa-solid fa-cross"></i>
-      <span>Medical &amp; welfare outreach</span><i class="fa-solid fa-cross"></i>
-      <span>Saved to save</span><i class="fa-solid fa-cross"></i>
-      <span>Bibles for the unreached</span><i class="fa-solid fa-cross"></i>
-      <span>Missionaries sent</span><i class="fa-solid fa-cross"></i>
-      <span>Village crusades</span><i class="fa-solid fa-cross"></i>
-      <span>Gospel tracts in local dialects</span><i class="fa-solid fa-cross"></i>
-      <span>Medical &amp; welfare outreach</span><i class="fa-solid fa-cross"></i>
-      <span>Saved to save</span><i class="fa-solid fa-cross"></i>
-    </div>
-  </div>
+  <!-- IMPACT NUMBERS (editable in the admin backend) -->
+  <section class="impact" aria-label="Our impact">
+    <dl class="max-w-6xl mx-auto px-5 grid grid-cols-2 md:grid-cols-4">
+      <div class="impact-item"><dd id="statSoulsDisplay" class="impact-num" data-countup>4,000+</dd><dt class="impact-label">Souls saved</dt></div>
+      <div class="impact-item"><dd id="statBiblesDisplay" class="impact-num" data-countup>2,500+</dd><dt class="impact-label">Bibles given</dt></div>
+      <div class="impact-item"><dd id="statVillagesDisplay" class="impact-num" data-countup>15+</dd><dt class="impact-label">Villages reached</dt></div>
+      <div class="impact-item"><dd id="statMissionariesDisplay" class="impact-num" data-countup>40+</dd><dt class="impact-label">Missionaries sent</dt></div>
+    </dl>
+  </section>
 
-  <!-- DEDICATED VISUAL HOOK SECTION (ROYALTY-FREE PHOTOGRAPHY + IMPACT BREAKDOWN) -->
-  <section id="hook-section" class="py-16 bg-gradient-to-b from-stsObsidian to-stsCard border-b border-black/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="eyebrow">Every Seed Has a Voice</span>
-        <h2 class="sec-title font-display">How Your $10 & Every Penny Transforms Isolated Villages</h2>
-        <p class="text-gray-500 text-sm sm:text-base mt-3">Real pictures from our outreaches: this is where your support goes.</p>
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div class="about-photo">
+        <img src="assets/img/photos/team-at-village-house-800.jpg" alt="The STS outreach team in a village" loading="lazy" decoding="async" class="w-full h-full object-cover" />
       </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Hook Card 1 -->
-        <div class="bg-stsObsidian border border-black/10 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-stsRed transition">
-          <div>
-            <div class="h-52 relative">
-              <img src="assets/img/photos/bush-path-800.jpg" alt="Missionaries carrying Bibles along a bush path" loading="lazy" decoding="async" class="w-full h-full object-cover" />
-              <div class="absolute bottom-3 left-3 bg-stsRed text-white font-bold text-xs px-3 py-1 rounded-md">$10 = 1 Village Bible</div>
-            </div>
-            <div class="p-6">
-              <h3 class="font-bold text-lg text-gray-900 mb-2">1. God's Word for the Unreached</h3>
-              <p class="text-gray-500 text-sm leading-relaxed">
-                Do you know that your <strong>$10 (or <span data-ngn="10">₦14,000</span>)</strong> places a translated print or audio Bible directly into the hands of a new convert family in an unreached village?
-              </p>
-            </div>
-          </div>
-          <div class="p-6 pt-0">
-            <button onclick="selectFundAndScroll('Bibles for Unreached Areas ($10/Bible)')" class="w-full bg-stsRed/20 hover:bg-stsRed text-stsRed hover:text-white border border-stsRed font-bold py-2.5 rounded-lg text-sm transition">
-              Sponsor Bibles Now &rarr;
-            </button>
-          </div>
-        </div>
-
-        <!-- Hook Card 2 -->
-        <div class="bg-stsObsidian border border-black/10 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-stsRed transition">
-          <div>
-            <div class="h-52 relative">
-              <img src="assets/img/photos/outreach-team-800.jpg" alt="The STS outreach team with their sound system" loading="lazy" decoding="async" class="w-full h-full object-cover" />
-              <div class="absolute bottom-3 left-3 bg-stsRed text-white font-bold text-xs px-3 py-1 rounded-md">Every Penny Sends Feet</div>
-            </div>
-            <div class="p-6">
-              <h3 class="font-bold text-lg text-gray-900 mb-2">2. Fueling Village Missionaries</h3>
-              <p class="text-gray-500 text-sm leading-relaxed">
-                Do you know that your <strong>penny</strong> fuels motorbikes, canoes, and trekking missionaries to cross rivers and bush paths to preach Christ in isolated settlements?
-              </p>
-            </div>
-          </div>
-          <div class="p-6 pt-0">
-            <button onclick="selectFundAndScroll('Missionary Support in the Field')" class="w-full bg-stsRed/20 hover:bg-stsRed text-stsRed hover:text-white border border-stsRed font-bold py-2.5 rounded-lg text-sm transition">
-              Support a Field Missionary &rarr;
-            </button>
-          </div>
-        </div>
-
-        <!-- Hook Card 3 -->
-        <div class="bg-stsObsidian border border-black/10 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-stsRed transition">
-          <div>
-            <div class="h-52 relative">
-              <img src="assets/img/photos/village-preaching-800.jpg" alt="Preaching to a village gathering at dusk" loading="lazy" decoding="async" class="w-full h-full object-cover" />
-              <div class="absolute bottom-3 left-3 bg-stsRed text-white font-bold text-xs px-3 py-1 rounded-md">Tracts & Rural Crusades</div>
-            </div>
-            <div class="p-6">
-              <h3 class="font-bold text-lg text-gray-900 mb-2">3. Gospel Tracts & Sound Systems</h3>
-              <p class="text-gray-500 text-sm leading-relaxed">
-                Every seed prints thousands of Gospel tracts in local dialects and powers crusade generators so whole villages can hear the message of salvation in one night.
-              </p>
-            </div>
-          </div>
-          <div class="p-6 pt-0">
-            <button onclick="selectFundAndScroll('Evangelism Tracts & Literature')" class="w-full bg-stsRed/20 hover:bg-stsRed text-stsRed hover:text-white border border-stsRed font-bold py-2.5 rounded-lg text-sm transition">
-              Sponsor Tracts & Outreach &rarr;
-            </button>
-          </div>
-        </div>
+      <div>
+        <p class="eyebrow">Who we are</p>
+        <h2 class="sec-title font-display">Every soul reached becomes a soul sent.</h2>
+        <p class="lead mt-5">Saved To Be Sent Mission Outreach (STS) carries the Gospel into unreached villages, streets and campuses across Africa and Asia. We put God's Word in people's hands and send missionaries where Christ has not yet been named.</p>
+        <ul class="pillars mt-8">
+          <li><span class="pillar-ico"><i class="fa-solid fa-book-bible" aria-hidden="true"></i></span><div><b>Bibles &amp; tracts</b><span>$10 puts a Bible in an unreached home.</span></div></li>
+          <li><span class="pillar-ico"><i class="fa-solid fa-person-hiking" aria-hidden="true"></i></span><div><b>Missionaries</b><span>We train, support and send workers into the field.</span></div></li>
+          <li><span class="pillar-ico"><i class="fa-solid fa-bullhorn" aria-hidden="true"></i></span><div><b>Outreach &amp; welfare</b><span>Crusades, village outreaches and care for the sick.</span></div></li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- UPCOMING EVENTS & DUAL LIVE COUNTDOWNS (FEB 10-12, 2027 CONFERENCE + APRIL 2027 OUTREACH) -->
-  <section id="events" class="py-16 bg-stsObsidian border-b border-black/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="eyebrow">Prophetic & Missionary Calendar</span>
-        <h2 class="sec-title font-display">Upcoming 2027 Conferences & Outreaches</h2>
+  <!-- EVENTS -->
+  <section id="events" class="section section-tint">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="sec-head">
+        <p class="eyebrow">Upcoming events</p>
+        <h2 class="sec-title font-display">Join us in 2027</h2>
       </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- EVENT 1: Missionaries Conference 2027 (FEB 10-12) -->
-        <div class="bg-stsCard border-2 border-stsRed rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xl">
-          <div>
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-              <span class="bg-stsRed text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase">
-                February 10 – 12, 2027
-              </span>
-              <span class="text-xs font-bold text-amber-600 bg-amber-500/10 border border-amber-400/30 px-3 py-1 rounded-full">
-                Limited to <span id="confCapLimitDisplay">200</span> Missionaries
-              </span>
+      <div class="grid md:grid-cols-2 gap-6">
+        <article class="card event-card">
+          <p class="event-date">February 10 – 12, 2027</p>
+          <h3 class="font-display text-2xl font-bold text-stsInk mt-2">Missionaries Conference 2027</h3>
+          <p class="text-gray-600 mt-2">Three days of equipping, prayer and sending for field missionaries and harvest workers. Limited to <span id="confCapLimitDisplay">200</span> places.</p>
+          <p id="confState" class="hidden mt-4 font-bold text-stsRed" role="status"></p>
+          <div class="countdown" role="timer" aria-label="Time left until the conference">
+            <div><b id="confDays">00</b><span>days</span></div>
+            <div><b id="confHours">00</b><span>hrs</span></div>
+            <div><b id="confMins">00</b><span>min</span></div>
+            <div><b id="confSecs">00</b><span>sec</span></div>
+          </div>
+          <div class="mt-5">
+            <div class="flex justify-between text-sm font-semibold text-gray-600 mb-2">
+              <span>Places taken</span>
+              <span><span id="confRegisteredCount">0</span> / <span id="confQuotaMax">200</span></span>
             </div>
-            <h3 class="font-display text-2xl sm:text-3xl font-bold text-gray-900">Missionaries Conference 2027</h3>
-            <p class="text-gray-600 text-sm mt-2 leading-relaxed">
-              3 days of intense spiritual equipping, fire impartation, and deployment strategy for field missionaries and harvest workers.
-            </p>
-
-            <!-- Live Countdown Timer 1 -->
-            <p id="confState" class="hidden mt-5 text-center font-extrabold text-stsRed" role="status"></p>
-            <div class="grid grid-cols-4 gap-2 sm:gap-3 my-6" role="timer" aria-label="Time left until the conference">
-              <div class="bg-stsObsidian border border-black/10 rounded-xl p-3 text-center">
-                <div id="confDays" class="text-2xl sm:text-3xl font-extrabold text-stsRed">00</div>
-                <div class="text-[10px] uppercase text-gray-500">Days</div>
-              </div>
-              <div class="bg-stsObsidian border border-black/10 rounded-xl p-3 text-center">
-                <div id="confHours" class="text-2xl sm:text-3xl font-extrabold text-gray-900">00</div>
-                <div class="text-[10px] uppercase text-gray-500">Hours</div>
-              </div>
-              <div class="bg-stsObsidian border border-black/10 rounded-xl p-3 text-center">
-                <div id="confMins" class="text-2xl sm:text-3xl font-extrabold text-gray-900">00</div>
-                <div class="text-[10px] uppercase text-gray-500">Minutes</div>
-              </div>
-              <div class="bg-stsObsidian border border-black/10 rounded-xl p-3 text-center">
-                <div id="confSecs" class="text-2xl sm:text-3xl font-extrabold text-stsRed">00</div>
-                <div class="text-[10px] uppercase text-gray-500">Seconds</div>
-              </div>
-            </div>
-
-            <!-- 200-Missionary Quota Progress Bar -->
-            <div class="bg-stsObsidian p-4 rounded-xl border border-black/10 mb-6">
-              <div class="flex justify-between text-xs font-bold mb-2">
-                <span class="text-gray-600">Registered Missionaries</span>
-                <span class="text-stsRed"><span id="confRegisteredCount">0</span> / <span id="confQuotaMax">200</span> Seats Taken</span>
-              </div>
-              <div class="w-full bg-red-100 h-2.5 rounded-full overflow-hidden" role="progressbar" aria-label="Conference seats taken" aria-valuemin="0" aria-valuemax="200" aria-valuenow="0">
-                <div id="confProgressBar" class="bg-stsRed h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
-              </div>
+            <div class="seats-bar" role="progressbar" aria-label="Conference places taken" aria-valuemin="0" aria-valuemax="200" aria-valuenow="0">
+              <div id="confProgressBar" style="width:0%"></div>
             </div>
           </div>
-
-          <button onclick="openEventModal('Missionaries Conference 2027 (Feb 10-12)')" class="w-full bg-stsRed hover:bg-red-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition">
-            <i class="fa-solid fa-user-check mr-2"></i>Register as one of the 200 Missionaries
-          </button>
-          <button id="viewMyInvoiceBtn" onclick="reopenInvoice()" class="hidden mt-3 w-full text-xs font-bold text-stsRed underline">View my registration invoice</button>
-        </div>
-
-        <!-- EVENT 2: APRIL 2027 MISSION OUTREACH -->
-        <div class="bg-stsCard border border-black/10 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xl">
-          <div>
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-              <span class="bg-gray-900 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase">
-                April 16 – 18, 2027
-              </span>
-              <span class="text-xs font-bold text-emerald-600 bg-emerald-500/10 border border-emerald-400/30 px-3 py-1 rounded-full">
-                Village & Rural Invasion
-              </span>
-            </div>
-            <h3 class="font-display text-2xl sm:text-3xl font-bold text-gray-900">April Mega Mission Outreach</h3>
-            <p class="text-gray-600 text-sm mt-2 leading-relaxed">
-              Full-scale evangelistic invasion taking free Bibles, medical aid, welfare packages, and open-air crusades into unreached villages.
-            </p>
-
-            <!-- Live Countdown Timer 2 -->
-            <p id="aprilState" class="hidden mt-5 text-center font-extrabold text-stsRed" role="status"></p>
-            <div class="grid grid-cols-4 gap-2 sm:gap-3 my-6" role="timer" aria-label="Time left until the April outreach">
-              <div class="bg-stsObsidian border border-black/10 rounded-xl p-3 text-center">
-                <div id="aprilDays" class="text-2xl sm:text-3xl font-extrabold text-stsRed">00</div>
-                <div class="text-[10px] uppercase text-gray-500">Days</div>
-              </div>
-              <div class="bg-stsObsidian border border-black/10 rounded-xl p-3 text-center">
-                <div id="aprilHours" class="text-2xl sm:text-3xl font-extrabold text-gray-900">00</div>
-                <div class="text-[10px] uppercase text-gray-500">Hours</div>
-              </div>
-              <div class="bg-stsObsidian border border-black/10 rounded-xl p-3 text-center">
-                <div id="aprilMins" class="text-2xl sm:text-3xl font-extrabold text-gray-900">00</div>
-                <div class="text-[10px] uppercase text-gray-500">Minutes</div>
-              </div>
-              <div class="bg-stsObsidian border border-black/10 rounded-xl p-3 text-center">
-                <div id="aprilSecs" class="text-2xl sm:text-3xl font-extrabold text-stsRed">00</div>
-                <div class="text-[10px] uppercase text-gray-500">Seconds</div>
-              </div>
-            </div>
-
-            <div class="bg-stsObsidian p-4 rounded-xl border border-black/10 mb-6 flex items-center justify-between">
-              <div class="text-xs text-gray-600">
-                <strong class="text-gray-900 block">Need Volunteers & Sponsors:</strong>
-                Evangelists, Medical Team, Welfare, Intercessors & Bible Sponsors
-              </div>
-              <span class="text-xs font-bold text-stsRed shrink-0 ml-2" id="aprilRegCountDisplay">0 Joined</span>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <button onclick="openEventModal('April 2027 Mission Outreach')" class="bg-gray-900 text-white hover:bg-black font-bold py-3.5 rounded-xl transition text-sm">
-              <i class="fa-solid fa-person-walking-luggage mr-1.5 text-stsRed"></i>Join Outreach Team
-            </button>
-            <button onclick="selectFundAndScroll('Support Towards Outreach & Crusades')" class="bg-stsRed/20 hover:bg-stsRed text-stsRed hover:text-white border border-stsRed font-bold py-3.5 rounded-xl transition text-sm">
-              <i class="fa-solid fa-hand-holding-dollar mr-1.5"></i>Sponsor Outreach
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="customEvents" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4"></div>
-  </section>
-
-  <!-- INTERACTIVE GOOGLE / LEAFLET MAP: AFRICA & ASIA GOSPEL REACH (LABELED IN RED + STRUCTURED LIST) -->
-  <section id="gospel-map" class="py-16 bg-stsCard border-b border-black/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-10">
-        <span class="eyebrow">Global Harvest Radar</span>
-        <h2 class="sec-title font-display">Gospel Footprint in Africa & Asia</h2>
-        <p class="text-gray-500 text-sm mt-2">
-          Interactive map labeled in <strong class="text-stsRed">Red</strong> showing where the Gospel has reached in Africa, where it has not yet reached in Africa, and where it has reached in Asia.
-        </p>
-      </div>
-
-      <!-- Map Filter Buttons -->
-      <div class="flex flex-wrap justify-center gap-3 mb-6">
-        <button onclick="focusMapRegion('ALL')" data-region="ALL" aria-pressed="true" class="map-btn bg-stsRed text-white text-xs font-bold px-4 py-2 rounded-lg">Show All Red Markers</button>
-        <button onclick="focusMapRegion('AFRICA_REACHED')" data-region="AFRICA_REACHED" aria-pressed="false" class="map-btn bg-stsObsidian hover:bg-black/10 text-gray-900 border border-stsRed text-xs font-bold px-4 py-2 rounded-lg">
-          <span class="inline-block w-2.5 h-2.5 rounded-full bg-stsRed mr-1.5"></span>Reached in Africa
-        </button>
-        <button onclick="focusMapRegion('AFRICA_UNREACHED')" data-region="AFRICA_UNREACHED" aria-pressed="false" class="map-btn bg-stsObsidian hover:bg-black/10 text-gray-900 border border-black/20 text-xs font-bold px-4 py-2 rounded-lg">
-          <span class="inline-block w-2.5 h-2.5 rounded-full border-2 border-stsRed mr-1.5"></span>Unreached in Africa (Target Fields)
-        </button>
-        <button onclick="focusMapRegion('ASIA_REACHED')" data-region="ASIA_REACHED" aria-pressed="false" class="map-btn bg-stsObsidian hover:bg-black/10 text-gray-900 border border-stsRed text-xs font-bold px-4 py-2 rounded-lg">
-          <span class="inline-block w-2.5 h-2.5 rounded-full bg-stsRed mr-1.5"></span>Reached in Asia
-        </button>
-      </div>
-
-      <!-- Interactive Map Container -->
-      <div class="rounded-2xl overflow-hidden border-2 border-stsRed shadow-2xl mb-10">
-        <div id="stsWorldMap" class="w-full h-[380px] sm:h-[480px] z-10 bg-stsObsidian" role="region" aria-label="Map of places reached and unreached"></div>
-      </div>
-
-      <!-- Listed Names Under Map Section (3 Well-Arranged Columns) -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Column 1: Where Gospel Has Reached in Africa -->
-        <div class="bg-stsObsidian border border-stsRed/50 rounded-2xl p-6">
-          <div class="flex items-center gap-2.5 mb-4 pb-3 border-b border-black/10">
-            <span class="w-3.5 h-3.5 rounded-full bg-stsRed animate-pulse"></span>
-            <h3 class="font-display font-bold text-base sm:text-lg text-gray-900">1. Reached in Africa</h3>
-          </div>
-          <ul id="listAfricaReached" class="space-y-3 text-sm text-gray-600"></ul>
-        </div>
-
-        <!-- Column 2: Where Gospel Has NOT Reached in Africa -->
-        <div class="bg-stsObsidian border border-stsRed rounded-2xl p-6">
-          <div class="flex items-center gap-2.5 mb-4 pb-3 border-b border-black/10">
-            <span class="w-3.5 h-3.5 rounded-full border-2 border-stsRed bg-black"></span>
-            <h3 class="font-display font-bold text-base sm:text-lg text-stsRed">2. Unreached in Africa (Urgent)</h3>
-          </div>
-          <ul id="listAfricaUnreached" class="space-y-3 text-sm text-gray-600"></ul>
-        </div>
-
-        <!-- Column 3: Where Gospel Has Reached in Asia -->
-        <div class="bg-stsObsidian border border-stsRed/50 rounded-2xl p-6">
-          <div class="flex items-center gap-2.5 mb-4 pb-3 border-b border-black/10">
-            <span class="w-3.5 h-3.5 rounded-full bg-stsRed animate-pulse"></span>
-            <h3 class="font-display font-bold text-base sm:text-lg text-gray-900">3. Reached in Asia</h3>
-          </div>
-          <ul id="listAsiaReached" class="space-y-3 text-sm text-gray-600"></ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WELL-ARRANGED OUTREACH CATALOG SECTION -->
-  <section id="catalog" class="py-16 bg-stsObsidian border-b border-black/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-        <div>
-          <span class="eyebrow">Field Evidence & Reports</span>
-          <h2 class="sec-title font-display">Mission & Crusade Catalog</h2>
-        </div>
-        <!-- Category Filter Buttons -->
-        <div class="flex flex-wrap gap-2">
-          <button onclick="renderCatalog('ALL')" data-filter="ALL" class="cat-btn bg-stsRed text-white text-xs font-bold px-3.5 py-2 rounded-lg border border-black/10">All Missions</button>
-          <button onclick="renderCatalog('Crusades')" data-filter="Crusades" class="cat-btn bg-stsCard hover:bg-black/10 text-gray-600 text-xs font-bold px-3.5 py-2 rounded-lg border border-black/10">Crusades</button>
-          <button onclick="renderCatalog('Village Invasions')" data-filter="Village Invasions" class="cat-btn bg-stsCard hover:bg-black/10 text-gray-600 text-xs font-bold px-3.5 py-2 rounded-lg border border-black/10">Village Invasions</button>
-          <button onclick="renderCatalog('Bibles & Tracts')" data-filter="Bibles &amp; Tracts" class="cat-btn bg-stsCard hover:bg-black/10 text-gray-600 text-xs font-bold px-3.5 py-2 rounded-lg border border-black/10">Bibles & Tracts</button>
-          <button onclick="renderCatalog('Medical & Welfare')" data-filter="Medical &amp; Welfare" class="cat-btn bg-stsCard hover:bg-black/10 text-gray-600 text-xs font-bold px-3.5 py-2 rounded-lg border border-black/10">Welfare Aid</button>
-        </div>
-      </div>
-
-      <!-- Responsive Catalog Grid -->
-      <div id="catalogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-    </div>
-  </section>
-
-  <!-- PAST OUTREACH PHOTO GALLERY -->
-  <section id="gallery" class="py-16 bg-stsCard border-b border-black/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
-        <div>
-          <span class="eyebrow">Moments From The Field</span>
-          <h2 class="sec-title font-display">Past Outreach Gallery</h2>
-        </div>
-      </div>
-      <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"></div>
-    </div>
-  </section>
-
-  <!-- PREVIOUS OUTREACH VIDEO ARCHIVE -->
-  <section id="videos" class="py-16 bg-stsObsidian border-b border-black/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
-        <div>
-          <span class="eyebrow">Watch Field Highlights</span>
-          <h2 class="sec-title font-display">Previous Outreach Videos</h2>
-        </div>
-      </div>
-
-      <div id="videoGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
-    </div>
-  </section>
-
-  <!-- 5-CATEGORY PURPOSE-DRIVEN GIVING PORTAL -->
-  <section id="giving" class="py-16 bg-stsObsidian border-b border-black/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="eyebrow">100% Purpose-Allocated Giving</span>
-        <h2 class="sec-title font-display">Give to Save & Send</h2>
-        <p class="text-gray-500 text-sm mt-2">
-          Select the exact mission category below. Your seed is tagged to the purpose you choose so 100% of it goes strictly to that need.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <!-- Left: 5 Selectable Giving Purpose Cards -->
-        <div class="lg:col-span-7 space-y-4">
-          <h3 class="font-bold text-sm uppercase tracking-wider text-gray-500 mb-2">Step 1: Choose What Your Seed Is Paying For</h3>
-
-          <div role="button" tabindex="0" onclick="setGivingCategory('Bibles for Unreached Areas ($10/Bible)')" class="give-cat-card cursor-pointer bg-stsCard border-2 border-stsRed p-4 rounded-xl flex items-center justify-between transition">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-xl bg-stsRed/20 text-stsRed flex items-center justify-center text-xl shrink-0">
-                <i class="fa-solid fa-book-bible"></i>
-              </div>
-              <div>
-                <h4 class="font-bold text-gray-900">1. Payment for Bibles ($10 / <span data-ngn="10">₦14,000</span> per Bible)</h4>
-                <p class="text-xs text-gray-500">Places physical & audio Bibles directly into unreached villages.</p>
-              </div>
-            </div>
-            <span class="text-xs font-extrabold bg-stsRed text-white px-2.5 py-1 rounded">Selected</span>
-          </div>
-
-          <div role="button" tabindex="0" onclick="setGivingCategory('Evangelism Tracts & Literature')" class="give-cat-card cursor-pointer bg-stsCard border border-black/10 hover:border-stsRed p-4 rounded-xl flex items-center justify-between transition">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-xl bg-black/5 text-stsRed flex items-center justify-center text-xl shrink-0">
-                <i class="fa-solid fa-newspaper"></i>
-              </div>
-              <div>
-                <h4 class="font-bold text-gray-900">2. Payment for Gospel Tracts</h4>
-                <p class="text-xs text-gray-500">Prints thousands of dialect tracts for street & village evangelism.</p>
-              </div>
-            </div>
-            <span class="text-xs font-bold text-gray-500">Select</span>
-          </div>
-
-          <div role="button" tabindex="0" onclick="setGivingCategory('Missionary Support in the Field')" class="give-cat-card cursor-pointer bg-stsCard border border-black/10 hover:border-stsRed p-4 rounded-xl flex items-center justify-between transition">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-xl bg-black/5 text-stsRed flex items-center justify-center text-xl shrink-0">
-                <i class="fa-solid fa-person-hiking"></i>
-              </div>
-              <div>
-                <h4 class="font-bold text-gray-900">3. Missionary Support (People Serving in Mission Field)</h4>
-                <p class="text-xs text-gray-500">Stipends, transport, and medical care for full-time village missionaries.</p>
-              </div>
-            </div>
-            <span class="text-xs font-bold text-gray-500">Select</span>
-          </div>
-
-          <div role="button" tabindex="0" onclick="setGivingCategory('Support Towards Outreach & Crusades')" class="give-cat-card cursor-pointer bg-stsCard border border-black/10 hover:border-stsRed p-4 rounded-xl flex items-center justify-between transition">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-xl bg-black/5 text-stsRed flex items-center justify-center text-xl shrink-0">
-                <i class="fa-solid fa-bullhorn"></i>
-              </div>
-              <div>
-                <h4 class="font-bold text-gray-900">4. Support Towards Outreach & Crusades</h4>
-                <p class="text-xs text-gray-500">Sound equipment, lighting, welfare food bags, and rural logistics.</p>
-              </div>
-            </div>
-            <span class="text-xs font-bold text-gray-500">Select</span>
-          </div>
-
-          <div role="button" tabindex="0" onclick="setGivingCategory('Personal Seed for the Mission')" class="give-cat-card cursor-pointer bg-stsCard border border-black/10 hover:border-stsRed p-4 rounded-xl flex items-center justify-between transition">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-xl bg-black/5 text-stsRed flex items-center justify-center text-xl shrink-0">
-                <i class="fa-solid fa-seedling"></i>
-              </div>
-              <div>
-                <h4 class="font-bold text-gray-900">5. Personal Seed for the Mission</h4>
-                <p class="text-xs text-gray-500">Covenant kingdom seed towards the global mandate of STS Outreach.</p>
-              </div>
-            </div>
-            <span class="text-xs font-bold text-gray-500">Select</span>
-          </div>
-        </div>
-
-        <div class="lg:col-span-7 -mt-4">
-          <button type="button" onclick="openAccountModal(document.getElementById('giveCategoryInput').value)" class="w-full flex items-center justify-center gap-3 bg-stsRed hover:bg-red-700 text-white font-extrabold py-4 rounded-xl transition text-sm mb-3">
-            <i class="fa-solid fa-wallet text-lg"></i> See All Payment Options (Bank, Paystack, Stripe, Crypto)
-          </button>
-          <a id="cryptoGiveBtn" href="#" target="_blank" rel="noopener" class="flex items-center justify-center gap-3 bg-white border-2 border-stsRed text-stsRed hover:bg-stsRed hover:text-white font-extrabold py-4 rounded-xl transition text-sm">
-            <i class="fa-brands fa-bitcoin text-xl"></i> Give in Cryptocurrency (USDT)
-          </a>
-          <p class="text-[11px] text-gray-500 text-center mt-1.5">Opens WhatsApp with a ready message asking for the USDT wallet address.</p>
-        </div>
-        <!-- Right: Account Details & Purpose Confirmation Form -->
-        <div class="lg:col-span-5 bg-stsCard border border-black/10 rounded-2xl p-6 sm:p-8 space-y-5">
-          <div class="bg-stsObsidian border border-stsRed/50 p-4 rounded-xl">
-            <div class="text-xs text-gray-500 uppercase font-bold">Allocated Purpose Account:</div>
-            <div id="selectedPurposeText" class="text-base font-extrabold text-stsRed mt-0.5">Bibles for Unreached Areas ($10/Bible)</div>
-            <div class="mt-3 pt-3 border-t border-black/10 text-sm space-y-1">
-              <div><span class="text-gray-500">Bank:</span> <strong id="bankNameDisplay" class="text-gray-900">Union Bank (Temporary Account)</strong></div>
-              <div><span class="text-gray-500">Account Name:</span> <strong id="acctNameDisplay" class="text-gray-900">Saved To Be Sent Mission Outreach</strong></div>
-              <div class="flex items-center justify-between pt-1">
-                <div><span class="text-gray-500">Account No:</span> <strong id="acctNumDisplay" class="text-stsRed text-base">0054212216</strong></div>
-                <button type="button" onclick="copyAcctNumber()" class="bg-black/5 hover:bg-black/10 text-xs px-2.5 py-1 rounded font-bold">
-                  <i class="fa-regular fa-copy mr-1"></i>Copy
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <form id="giveForm" onsubmit="submitDonationForm(event)" class="space-y-4">
-            <h4 class="font-bold text-sm text-gray-900">Step 2: Log Your Payment Purpose</h4>
-            <input type="hidden" id="giveCategoryInput" value="Bibles for Unreached Areas ($10/Bible)" />
-            <div class="hp-field" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
-            <div>
-              <label for="giveName" class="text-xs text-gray-500 block mb-1">Full Name *</label>
-              <input type="text" id="giveName" required placeholder="Bro. / Sis. Full Name" class="w-full bg-stsObsidian border border-black/10 rounded-lg px-3.5 py-2.5 text-sm text-gray-900 focus:border-stsRed outline-none" />
-            </div>
-            <div class="grid grid-cols-2 gap-3">
-              <div>
-                <label for="givePhone" class="text-xs text-gray-500 block mb-1">Phone / WhatsApp *</label>
-                <input type="tel" id="givePhone" required placeholder="+234 / +1..." class="w-full bg-stsObsidian border border-black/10 rounded-lg px-3.5 py-2.5 text-sm text-gray-900 focus:border-stsRed outline-none" />
-              </div>
-              <div>
-                <label for="giveAmount" class="text-xs text-gray-500 block mb-1">Amount Sent *</label>
-                <input type="text" id="giveAmount" required placeholder="e.g. $50 or ₦30,000" class="w-full bg-stsObsidian border border-black/10 rounded-lg px-3.5 py-2.5 text-sm text-gray-900 focus:border-stsRed outline-none" />
-              </div>
-            </div>
-            <div>
-              <label for="giveEmail" class="text-xs text-gray-500 block mb-1">Email Address * (your thank-you email goes here)</label>
-              <input type="email" id="giveEmail" required placeholder="you@example.com" class="w-full bg-stsObsidian border border-black/10 rounded-lg px-3.5 py-2.5 text-sm text-gray-900 focus:border-stsRed outline-none" />
-            </div>
-            <div>
-              <label for="giveShot" class="text-xs text-gray-500 block mb-1">Upload screenshot of your giving *</label>
-              <input type="file" id="giveShot" accept="image/*" required class="w-full text-xs text-gray-600" />
-            </div>
-            <div>
-              <label for="giveNote" class="text-xs text-gray-500 block mb-1">Note / Specific Village or Instruction</label>
-              <input type="text" id="giveNote" placeholder="e.g. For 5 Village Bibles" class="w-full bg-stsObsidian border border-black/10 rounded-lg px-3.5 py-2.5 text-sm text-gray-900 focus:border-stsRed outline-none" />
-            </div>
-            <label class="flex items-start gap-2 text-sm font-bold text-gray-900"><input type="checkbox" id="giveDone" required class="mt-1 accent-red-600" /> I have given</label>
-            <button type="submit" id="giveSubmitBtn" class="w-full bg-stsRed hover:bg-red-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition text-sm">
-              <i class="fa-solid fa-paper-plane mr-2"></i>Confirm Purpose Payment to Ministry
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MONTHLY PARTNER SECTION -->
-  <section id="partner" class="py-16 bg-stsCard border-b border-black/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-10">
-        <span class="eyebrow">Walk With Us Every Month</span>
-        <h2 class="sec-title font-display">Do You Want to Become Our Monthly Partner?</h2>
-        <p class="text-gray-500 text-sm sm:text-base mt-3">A seed sown every month keeps Bibles, relief packages and missionaries moving into unreached villages all year round. Tap below and tell us your pledge.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <figure role="button" tabindex="0" aria-label="Become a monthly partner" onclick="openPartnerModal()" class="cursor-pointer bg-stsObsidian border border-black/10 hover:border-stsRed rounded-2xl overflow-hidden transition">
-          <svg viewBox="0 0 480 300" class="w-full h-auto block" role="img" aria-label="A sower scattering seed over a ploughed field at sunrise">
-            <defs>
-              <linearGradient id="sowSky" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#1a0a0c"/><stop offset=".55" stop-color="#8a1010"/><stop offset="1" stop-color="#F59E0B"/>
-              </linearGradient>
-            </defs>
-            <rect width="480" height="300" fill="url(#sowSky)"/>
-            <circle cx="350" cy="180" r="48" fill="#FDE68A" opacity=".9"/>
-            <path d="M0 190 Q110 150 230 186 T480 178 L480 300 L0 300Z" fill="#3b1608"/>
-            <path d="M0 218 Q240 190 480 220 L480 300 L0 300Z" fill="#2a0f06"/>
-            <g stroke="#6b3112" stroke-width="2" fill="none">
-              <path d="M0 238 Q240 212 480 240"/><path d="M0 256 Q240 232 480 258"/><path d="M0 274 Q240 252 480 276"/><path d="M0 292 Q240 272 480 294"/>
-            </g>
-            <g stroke="#4ADE80" stroke-width="2.5" fill="none" stroke-linecap="round">
-              <path d="M60 246v-10M60 242q-7 0-9-8M60 242q7 0 9-8"/>
-              <path d="M120 264v-10M120 260q-7 0-9-8M120 260q7 0 9-8"/>
-              <path d="M300 240v-10M300 236q-7 0-9-8M300 236q7 0 9-8"/>
-              <path d="M360 256v-10M360 252q-7 0-9-8M360 252q7 0 9-8"/>
-              <path d="M420 244v-10M420 240q-7 0-9-8M420 240q7 0 9-8"/>
-              <path d="M450 272v-10M450 268q-7 0-9-8M450 268q7 0 9-8"/>
-              <path d="M240 278v-10M240 274q-7 0-9-8M240 274q7 0 9-8"/>
-            </g>
-            <g fill="#F3F4F6">
-              <circle cx="150" cy="148" r="11"/>
-              <path d="M138 160L162 160L168 205L160 205L162 236L152 236L150 212L148 236L138 236L140 205L132 205Z"/>
-              <path d="M160 166L205 140L209 148L166 178Z"/>
-              <path d="M140 166L128 190L134 194L146 176Z"/>
-              <ellipse cx="127" cy="201" rx="12" ry="14" fill="#E60000"/>
-            </g>
-            <g fill="#FDE68A">
-              <circle cx="216" cy="138" r="3"/><circle cx="230" cy="147" r="3"/><circle cx="242" cy="161" r="3"/><circle cx="252" cy="179" r="3"/><circle cx="264" cy="201" r="3"/>
-              <circle cx="224" cy="128" r="3"/><circle cx="240" cy="137" r="3"/><circle cx="256" cy="151" r="3"/><circle cx="270" cy="170" r="3"/><circle cx="283" cy="193" r="3"/>
-            </g>
-          </svg>
-          <figcaption class="p-4">
-            <div class="font-bold text-gray-900">Sowing the Seed</div>
-            <p class="text-xs text-gray-500 mt-1">Every monthly seed is planted in faith and watered by prayer.</p>
-          </figcaption>
-        </figure>
-
-        <figure role="button" tabindex="0" aria-label="Become a monthly partner" onclick="openPartnerModal()" class="cursor-pointer bg-stsObsidian border border-black/10 hover:border-stsRed rounded-2xl overflow-hidden transition">
-          <svg viewBox="0 0 480 300" class="w-full h-auto block" role="img" aria-label="A missionary walking a village path toward a ripe harvest field at sunrise">
-            <defs>
-              <linearGradient id="misSky" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#0A0A0D"/><stop offset=".5" stop-color="#7a0c0c"/><stop offset="1" stop-color="#F59E0B"/>
-              </linearGradient>
-              <pattern id="wheatPat" width="14" height="16" patternUnits="userSpaceOnUse">
-                <path d="M7 16V5M7 10l-4-4M7 10l4-4M7 6l-3-4M7 6l3-4" stroke="#F59E0B" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-              </pattern>
-            </defs>
-            <rect width="480" height="300" fill="url(#misSky)"/>
-            <circle cx="240" cy="180" r="64" fill="#FDE68A" opacity=".85"/>
-            <path d="M0 190 Q80 150 170 182 T330 176 T480 170 L480 300 L0 300Z" fill="#4a0d0d"/>
-            <rect x="148" y="146" width="4" height="30" fill="#FFFFFF"/><rect x="140" y="154" width="20" height="4" fill="#FFFFFF"/>
-            <path d="M0 200 Q120 178 240 196 T480 192 L480 300 L0 300Z" fill="#6b3a0a"/>
-            <path d="M0 200 Q120 178 240 196 T480 192 L480 300 L0 300Z" fill="url(#wheatPat)"/>
-            <path d="M196 300 Q236 246 258 198 L272 198 Q262 250 312 300Z" fill="#2a1208"/>
-            <g>
-              <rect x="52" y="196" width="46" height="26" fill="#2a1208"/><path d="M44 198L75 170L106 198Z" fill="#5b3a12"/><rect x="68" y="204" width="12" height="18" fill="#0A0A0D"/>
-              <rect x="380" y="190" width="42" height="24" fill="#2a1208"/><path d="M373 192L401 167L429 192Z" fill="#5b3a12"/><rect x="394" y="198" width="11" height="16" fill="#0A0A0D"/>
-            </g>
-            <g fill="#F3F4F6">
-              <circle cx="252" cy="214" r="5"/>
-              <path d="M247 220L257 220L259 244L245 244Z"/>
-              <rect x="258" y="221" width="6" height="14" rx="2"/>
-              <rect x="243" y="226" width="6" height="8" fill="#E60000"/>
-            </g>
-          </svg>
-          <figcaption class="p-4">
-            <div class="font-bold text-gray-900">The Mission Field</div>
-            <p class="text-xs text-gray-500 mt-1">The harvest is ready and the labourers need your steady support.</p>
-          </figcaption>
-        </figure>
-      </div>
-
-      <div class="max-w-2xl mx-auto mb-8 bg-stsObsidian border border-black/10 rounded-2xl p-5 text-center">
-        <div class="text-xs font-bold uppercase tracking-widest text-stsRed mb-1">Choose your monthly seed</div>
-        <p class="text-xs text-gray-500 mb-3">Tap an amount, or type any amount you want.</p>
-        <div id="pledgeChips" class="flex flex-wrap justify-center gap-2"></div>
-        <div class="flex flex-col sm:flex-row gap-2 mt-4">
-          <input id="pledgeCustom" type="text" inputmode="decimal" placeholder="Other amount, e.g. $75 or ₦30,000" class="flex-1 bg-stsCard border border-black/15 rounded-lg px-3.5 py-2.5 text-sm text-gray-900" />
-          <button type="button" onclick="pledgeFromCustom()" class="bg-stsRed hover:bg-red-700 text-white font-bold px-5 py-2.5 rounded-lg text-sm">Partner With This Amount</button>
-        </div>
-      </div>
-
-      <div class="text-center">
-        <button onclick="openPartnerModal()" class="bg-stsRed hover:bg-red-700 text-white font-extrabold px-8 py-4 rounded-xl shadow-lg shadow-stsRed/30 transition text-sm sm:text-base">
-          <i class="fa-solid fa-seedling mr-2"></i>Yes, I Want to Become a Monthly Partner
-        </button>
-        <p class="text-[11px] text-gray-500 mt-2">You will fill a short form: name, birthday, contact, email and your monthly pledge.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- MISSIONARY TRAINING & JOIN FIELD SECTION + PRAYER REQUEST ALTAR -->
-  <section id="training" class="py-16 bg-stsCard border-b border-black/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-
-        <!-- Form 1: Missionary Training & Join Mission Field -->
-        <div class="bg-stsObsidian border border-black/10 rounded-2xl p-6 sm:p-8">
-          <span class="eyebrow">School of Fire & Deployment</span>
-          <h3 class="font-display text-2xl font-bold text-gray-900 mt-1 mb-2">Be Trained &amp; Join the Mission Field</h3>
-          <p class="text-gray-500 text-sm mb-6">
-            Want to be trained as a field evangelist, intercessor, medical volunteer, or rural missionary? Fill out this form—details are sent straight to <strong class="text-gray-900">stsglobaloutreach@gmail.com</strong>.
-          </p>
-
-          <form onsubmit="submitTrainingForm(event)" class="space-y-4">
-            <div class="hp-field" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label for="trainName" class="text-xs text-gray-500 block mb-1">Full Name *</label>
-                <input type="text" id="trainName" required placeholder="Your Full Name" class="w-full bg-stsCard border border-black/10 rounded-lg px-3.5 py-2.5 text-sm text-gray-900" />
-              </div>
-              <div>
-                <label for="trainEmail" class="text-xs text-gray-500 block mb-1">Email Address *</label>
-                <input type="email" id="trainEmail" required placeholder="you@example.com" class="w-full bg-stsCard border border-black/10 rounded-lg px-3.5 py-2.5 text-sm text-gray-900" />
-              </div>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label for="trainPhone" class="text-xs text-gray-500 block mb-1">Phone / WhatsApp *</label>
-                <input type="tel" id="trainPhone" required placeholder="+234..." class="w-full bg-stsCard border border-black/10 rounded-lg px-3.5 py-2.5 text-sm text-gray-900" />
-              </div>
-              <div>
-                <label for="trainCity" class="text-xs text-gray-500 block mb-1">City & Country *</label>
-                <input type="text" id="trainCity" required placeholder="e.g. Abeokuta, Nigeria" class="w-full bg-stsCard border border-black/10 rounded-lg px-3.5 py-2.5 text-sm text-gray-900" />
-              </div>
-            </div>
-            <div>
-              <label for="trainTrack" class="text-xs text-gray-500 block mb-1">Preferred Mission Track *</label>
-              <select id="trainTrack" class="w-full bg-stsCard border border-black/10 rounded-lg px-3.5 py-2.5 text-sm text-gray-900">
-                <option value="Full-Time Field Missionary Training">Full-Time Field Missionary Training</option>
-                <option value="Rural & Village Crusade Evangelist">Rural & Village Crusade Evangelist</option>
-                <option value="Medical & Welfare Outreach Squad">Medical & Welfare Outreach Squad</option>
-                <option value="Street & Campus Fire Squad">Street & Campus Fire Squad</option>
-                <option value="Media, Technical & Bible Distribution">Media, Technical & Bible Distribution</option>
-              </select>
-            </div>
-            <div>
-              <label for="trainReason" class="text-xs text-gray-500 block mb-1">Briefly Share Your Burden for Souls</label>
-              <textarea id="trainReason" rows="2" placeholder="Why do you want to be trained for the mission field?" class="w-full bg-stsCard border border-black/10 rounded-lg px-3.5 py-2 text-sm text-gray-900"></textarea>
-            </div>
-            <button type="submit" class="w-full bg-stsRed hover:bg-red-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition text-sm">
-              <i class="fa-solid fa-fire mr-2"></i>Submit Missionary Training Application
-            </button>
-          </form>
-        </div>
-
-        <!-- Form 2: 24/7 Prayer Request & Testimony Altar -->
-        <div id="prayer" class="bg-stsObsidian border border-black/10 rounded-2xl p-6 sm:p-8">
-          <span class="eyebrow">24/7 Intercessory Wall</span>
-          <h3 class="font-display text-2xl font-bold text-gray-900 mt-1 mb-2">Send Your Prayer Request</h3>
-          <p class="text-gray-500 text-sm mb-6">
-            Our missionary intercessors pray over every burden submitted here. Every request is handled with care and confidentiality.
-          </p>
-
-          <form onsubmit="submitPrayerForm(event)" class="space-y-4">
-            <div class="hp-field" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label for="prayName" class="text-xs text-gray-500 block mb-1">Your Name *</label>
-                <input type="text" id="prayName" required placeholder="Your Name" class="w-full bg-stsCard border border-black/10 rounded-lg px-3.5 py-2.5 text-sm text-gray-900" />
-              </div>
-              <div>
-                <label for="prayContact" class="text-xs text-gray-500 block mb-1">Phone or Email *</label>
-                <input type="text" id="prayContact" required placeholder="Phone or Email" class="w-full bg-stsCard border border-black/10 rounded-lg px-3.5 py-2.5 text-sm text-gray-900" />
-              </div>
-            </div>
-            <div>
-              <label for="prayType" class="text-xs text-gray-500 block mb-1">Prayer Category</label>
-              <select id="prayType" class="w-full bg-stsCard border border-black/10 rounded-lg px-3.5 py-2.5 text-sm text-gray-900">
-                <option value="Healing & Deliverance">Healing & Deliverance</option>
-                <option value="Salvation of Family / Loved Ones">Salvation of Family / Loved Ones</option>
-                <option value="Spiritual Revival & Fresh Fire">Spiritual Revival & Fresh Fire</option>
-                <option value="Praise Report / Testimony">Praise Report / Testimony</option>
-              </select>
-            </div>
-            <div>
-              <label for="prayMessage" class="text-xs text-gray-500 block mb-1">Write Your Prayer Request *</label>
-              <textarea id="prayMessage" required rows="3" placeholder="Share your prayer burden with our intercessors..." class="w-full bg-stsCard border border-black/10 rounded-lg px-3.5 py-2 text-sm text-gray-900"></textarea>
-            </div>
-            <button type="submit" class="w-full bg-gray-900 text-white hover:bg-black font-bold py-3.5 rounded-xl transition text-sm">
-              <i class="fa-solid fa-hands-praying text-stsRed mr-2"></i>Send Prayer Request to Altar
-            </button>
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT & CONTACT -->
-  <section id="about" class="py-16 bg-stsObsidian">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="eyebrow">Who We Are</span>
-        <h2 class="sec-title font-display">About Saved To Be Sent</h2>
-        <p class="text-gray-600 text-base sm:text-lg mt-4 leading-relaxed">
-          Saved To Be Sent Mission Outreach (STS) carries the Gospel into unreached villages, streets and campuses across Africa and Asia. Saved to save is our heartbeat: every soul reached becomes a soul sent.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
-        <!-- Story: what we do -->
-        <article class="about-card lg:col-span-3">
-          <div class="relative h-52 sm:h-64 overflow-hidden">
-            <img src="assets/img/photos/team-at-village-house-800.jpg" alt="The STS outreach team in a village" loading="lazy" decoding="async" class="w-full h-full object-cover object-[50%_45%]" />
-            <div class="absolute inset-0 bg-gradient-to-t from-[#14151B] via-[#14151B]/10 to-transparent"></div>
-          </div>
-          <div class="p-6 sm:p-8 -mt-10 relative">
-            <h3 class="font-display font-bold text-2xl text-white">What we do</h3>
-            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
-              <li class="about-item"><span class="about-ico"><i class="fa-solid fa-book-bible" aria-hidden="true"></i></span><span>Put Bibles and Gospel tracts into unreached villages</span></li>
-              <li class="about-item"><span class="about-ico"><i class="fa-solid fa-person-hiking" aria-hidden="true"></i></span><span>Support and send missionaries into the field</span></li>
-              <li class="about-item"><span class="about-ico"><i class="fa-solid fa-bullhorn" aria-hidden="true"></i></span><span>Hold crusades, village outreaches and welfare drives</span></li>
-              <li class="about-item"><span class="about-ico"><i class="fa-solid fa-fire" aria-hidden="true"></i></span><span>Train and equip missionaries through conferences</span></li>
-            </ul>
-          </div>
+          <button onclick="openEventModal('Missionaries Conference 2027 (Feb 10-12)')" class="btn btn-red w-full justify-center mt-6">Register for the conference</button>
+          <button id="viewMyInvoiceBtn" onclick="reopenInvoice()" class="hidden mt-3 w-full text-sm font-semibold text-stsRed underline">View my registration invoice</button>
         </article>
 
-        <!-- Contact: one consistent list instead of a wall of buttons -->
-        <aside class="about-card lg:col-span-2 p-6 sm:p-8 flex flex-col" aria-labelledby="contactTitle">
-          <span class="eyebrow">Contact</span>
-          <h3 id="contactTitle" class="font-display font-bold text-2xl text-white mt-2">Have a question?</h3>
-          <p class="text-gray-500 text-sm mt-1">Call, WhatsApp or email the STS team.</p>
+        <article class="card event-card">
+          <p class="event-date">April 16 – 18, 2027</p>
+          <h3 class="font-display text-2xl font-bold text-stsInk mt-2">April Mission Outreach</h3>
+          <p class="text-gray-600 mt-2">Bibles, medical care, welfare packages and open-air preaching in unreached villages. Evangelists, medical volunteers and intercessors are welcome.</p>
+          <p id="aprilState" class="hidden mt-4 font-bold text-stsRed" role="status"></p>
+          <div class="countdown" role="timer" aria-label="Time left until the April outreach">
+            <div><b id="aprilDays">00</b><span>days</span></div>
+            <div><b id="aprilHours">00</b><span>hrs</span></div>
+            <div><b id="aprilMins">00</b><span>min</span></div>
+            <div><b id="aprilSecs">00</b><span>sec</span></div>
+          </div>
+          <p class="hidden mt-5 text-sm font-semibold text-gray-600"><span id="aprilRegCountDisplay">0 Joined</span> so far</p>
+          <div class="grid grid-cols-2 gap-3 mt-6">
+            <button onclick="openEventModal('April 2027 Mission Outreach')" class="btn btn-dark justify-center">Join the team</button>
+            <button onclick="selectFundAndScroll('Support Towards Outreach & Crusades')" class="btn btn-outline justify-center">Sponsor it</button>
+          </div>
+        </article>
+      </div>
+      <div id="customEvents" class="mt-6"></div>
+    </div>
+  </section>
 
-          <ul class="contact-list mt-6">
-            <li class="contact-row">
-              <span class="contact-ico"><i class="fa-solid fa-phone" aria-hidden="true"></i></span>
-              <div class="min-w-0 flex-1">
-                <div class="contact-label">Phone &amp; WhatsApp</div>
-                <a href="tel:+2349136279311" class="contact-value">+234 913 627 9311</a>
-              </div>
-              <div class="flex gap-2 shrink-0">
-                <a href="tel:+2349136279311" class="contact-act" aria-label="Call +234 913 627 9311"><i class="fa-solid fa-phone" aria-hidden="true"></i></a>
-                <a href="https://wa.me/2349136279311" target="_blank" rel="noopener" class="contact-act is-wa" aria-label="WhatsApp +234 913 627 9311"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
-              </div>
-            </li>
-            <li class="contact-row">
-              <span class="contact-ico"><i class="fa-solid fa-phone" aria-hidden="true"></i></span>
-              <div class="min-w-0 flex-1">
-                <div class="contact-label">Phone &amp; WhatsApp</div>
-                <a href="tel:+2349035458629" class="contact-value">+234 903 545 8629</a>
-              </div>
-              <div class="flex gap-2 shrink-0">
-                <a href="tel:+2349035458629" class="contact-act" aria-label="Call +234 903 545 8629"><i class="fa-solid fa-phone" aria-hidden="true"></i></a>
-                <a href="https://wa.me/2349035458629" target="_blank" rel="noopener" class="contact-act is-wa" aria-label="WhatsApp +234 903 545 8629"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
-              </div>
-            </li>
-            <li class="contact-row">
-              <span class="contact-ico"><i class="fa-solid fa-envelope" aria-hidden="true"></i></span>
-              <div class="min-w-0 flex-1">
-                <div class="contact-label">Email</div>
-                <a href="mailto:stsglobaloutreach@gmail.com" class="contact-value text-[0.95rem] break-all">stsglobaloutreach@gmail.com</a>
-              </div>
-            </li>
-            <li class="contact-row">
-              <span class="contact-ico"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></span>
-              <div class="min-w-0 flex-1">
-                <div class="contact-label">Facebook</div>
-                <div class="flex flex-wrap gap-x-4 gap-y-1">
-                  <a href="https://www.facebook.com/StsglobalOutreach" target="_blank" rel="noopener" class="contact-link">STS Global Outreach</a>
-                  <a href="https://www.facebook.com/olaseru.daniel" target="_blank" rel="noopener" class="contact-link">Daniel</a>
-                </div>
-              </div>
-            </li>
-          </ul>
-
-          <a href="https://wa.me/2349136279311?text=Hello%20STS%2C%20I%20have%20a%20question." target="_blank" rel="noopener" class="btn-primary justify-center mt-6 w-full"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Message us on WhatsApp</a>
-        </aside>
+  <!-- OUR WORK -->
+  <section id="work" class="section">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="sec-head">
+        <p class="eyebrow">Our work</p>
+        <h2 class="sec-title font-display">From the field</h2>
+        <p class="lead mt-4">Real moments from our outreaches. Every one was made possible by people who give and pray.</p>
+      </div>
+      <div id="catalog">
+        <div id="catalogGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </div>
+      <div id="gallery" class="mt-16">
+        <h3 class="font-display text-2xl font-bold text-stsInk mb-6">Photo gallery</h3>
+        <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-4 gap-3"></div>
+      </div>
+      <div id="videos" class="mt-16 hidden">
+        <h3 class="font-display text-2xl font-bold text-stsInk mb-6">Videos</h3>
+        <div id="videoGrid" class="grid md:grid-cols-3 gap-6"></div>
       </div>
     </div>
   </section>
 
+  <!-- GIVE -->
+  <section id="giving" class="section section-tint">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="sec-head">
+        <p class="eyebrow">Give</p>
+        <h2 class="sec-title font-display">Your gift sends the Gospel</h2>
+        <p class="lead mt-4">Choose what your gift is for. It is recorded against that purpose.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-5 gap-8 items-start">
+        <div class="lg:col-span-3">
+          <h3 class="step-title">1. Choose a purpose</h3>
+          <div class="space-y-3">
+            <div role="button" tabindex="0" onclick="setGivingCategory('Bibles for Unreached Areas ($10/Bible)')" class="give-cat-card">
+              <div class="flex items-center gap-4"><span class="pillar-ico"><i class="fa-solid fa-book-bible" aria-hidden="true"></i></span><div><h4 class="font-bold text-stsInk">Bibles for unreached areas</h4><p class="text-sm text-gray-500">$10 / <span data-ngn="10">₦14,000</span> per Bible</p></div></div>
+              <span>Select</span>
+            </div>
+            <div role="button" tabindex="0" onclick="setGivingCategory('Evangelism Tracts & Literature')" class="give-cat-card">
+              <div class="flex items-center gap-4"><span class="pillar-ico"><i class="fa-solid fa-newspaper" aria-hidden="true"></i></span><div><h4 class="font-bold text-stsInk">Gospel tracts &amp; literature</h4><p class="text-sm text-gray-500">Tracts in local languages for street and village evangelism</p></div></div>
+              <span>Select</span>
+            </div>
+            <div role="button" tabindex="0" onclick="setGivingCategory('Missionary Support in the Field')" class="give-cat-card">
+              <div class="flex items-center gap-4"><span class="pillar-ico"><i class="fa-solid fa-person-hiking" aria-hidden="true"></i></span><div><h4 class="font-bold text-stsInk">Missionary support</h4><p class="text-sm text-gray-500">Transport, welfare and care for missionaries in the field</p></div></div>
+              <span>Select</span>
+            </div>
+            <div role="button" tabindex="0" onclick="setGivingCategory('Support Towards Outreach & Crusades')" class="give-cat-card">
+              <div class="flex items-center gap-4"><span class="pillar-ico"><i class="fa-solid fa-bullhorn" aria-hidden="true"></i></span><div><h4 class="font-bold text-stsInk">Outreaches &amp; crusades</h4><p class="text-sm text-gray-500">Sound, lighting, welfare food bags and logistics</p></div></div>
+              <span>Select</span>
+            </div>
+            <div role="button" tabindex="0" onclick="setGivingCategory('Personal Seed for the Mission')" class="give-cat-card">
+              <div class="flex items-center gap-4"><span class="pillar-ico"><i class="fa-solid fa-seedling" aria-hidden="true"></i></span><div><h4 class="font-bold text-stsInk">Where most needed</h4><p class="text-sm text-gray-500">A seed toward the whole mission</p></div></div>
+              <span>Select</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-2 space-y-6">
+          <div class="card p-6">
+            <h3 class="step-title">2. Send your gift</h3>
+            <div class="text-xs font-bold uppercase tracking-wider text-gray-500">Giving for</div>
+            <div id="selectedPurposeText" class="font-bold text-stsRed mt-1">Bibles for Unreached Areas ($10/Bible)</div>
+            <dl class="bank mt-4">
+              <div><dt>Bank</dt><dd id="bankNameDisplay">Union Bank (Temporary Account)</dd></div>
+              <div><dt>Account name</dt><dd id="acctNameDisplay">Saved To Be Sent Mission Outreach</dd></div>
+              <div><dt>Account no.</dt><dd class="flex items-center justify-between gap-2"><span id="acctNumDisplay" class="text-lg font-bold tracking-wider text-stsInk">0054212216</span><button type="button" onclick="copyAcctNumber()" class="btn btn-outline btn-xs">Copy</button></dd></div>
+            </dl>
+            <button type="button" onclick="openAccountModal(document.getElementById('giveCategoryInput').value)" class="btn btn-red w-full justify-center mt-5">Card, Paystack, Stripe or crypto</button>
+            <a id="cryptoGiveBtn" href="#" target="_blank" rel="noopener" class="block text-center text-sm font-semibold text-gray-500 hover:text-stsRed mt-3">Give in cryptocurrency (USDT) via WhatsApp</a>
+          </div>
+
+          <form id="giveForm" onsubmit="submitDonationForm(event)" class="card p-6 space-y-4">
+            <h3 class="step-title">3. Let us know you gave</h3>
+            <input type="hidden" id="giveCategoryInput" value="Bibles for Unreached Areas ($10/Bible)" />
+            <div class="hp-field" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+            <div><label for="giveName" class="field-label">Full name</label><input type="text" id="giveName" required autocomplete="name" class="field" /></div>
+            <div class="grid grid-cols-2 gap-3">
+              <div><label for="givePhone" class="field-label">Phone / WhatsApp</label><input type="tel" id="givePhone" required autocomplete="tel" class="field" /></div>
+              <div><label for="giveAmount" class="field-label">Amount</label><input type="text" id="giveAmount" required class="field" /></div>
+            </div>
+            <div><label for="giveEmail" class="field-label">Email (for your thank-you note)</label><input type="email" id="giveEmail" required autocomplete="email" class="field" /></div>
+            <div><label for="giveShot" class="field-label">Screenshot of your transfer</label><input type="file" id="giveShot" accept="image/*" required class="w-full text-sm text-gray-600" /></div>
+            <div><label for="giveNote" class="field-label">Note (optional)</label><input type="text" id="giveNote" placeholder="e.g. For 5 village Bibles" class="field" /></div>
+            <label class="flex items-start gap-2 text-sm font-semibold text-stsInk"><input type="checkbox" id="giveDone" required class="mt-1 accent-red-600" /> I have sent my gift</label>
+            <button type="submit" id="giveSubmitBtn" class="btn btn-red w-full justify-center">Confirm my gift</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Monthly partners -->
+      <div id="partner" class="partner-band mt-16">
+        <div>
+          <h3 class="font-display text-3xl font-bold text-white">Become a monthly partner</h3>
+          <p class="text-white/80 mt-2 max-w-xl">A gift every month keeps Bibles and missionaries moving all year. Choose an amount to get started.</p>
+        </div>
+        <div class="w-full lg:max-w-md">
+          <div id="pledgeChips" class="flex flex-wrap gap-2"></div>
+          <div class="flex flex-col sm:flex-row gap-2 mt-3">
+            <input id="pledgeCustom" type="text" inputmode="decimal" aria-label="Other monthly amount" placeholder="Other amount" class="field flex-1" />
+            <button type="button" onclick="pledgeFromCustom()" class="btn btn-light justify-center">Partner monthly</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GET INVOLVED -->
+  <section id="involved" class="section">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="sec-head">
+        <p class="eyebrow">Get involved</p>
+        <h2 class="sec-title font-display">Go with us, or pray with us</h2>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div id="training" class="card p-6 sm:p-8">
+          <h3 class="font-display text-2xl font-bold text-stsInk">Join the mission field</h3>
+          <p class="text-gray-600 mt-2 mb-6">Be trained as a field evangelist, medical volunteer, intercessor or missionary.</p>
+          <form onsubmit="submitTrainingForm(event)" class="space-y-4">
+            <div class="hp-field" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div><label for="trainName" class="field-label">Full name</label><input type="text" id="trainName" required autocomplete="name" class="field" /></div>
+              <div><label for="trainEmail" class="field-label">Email</label><input type="email" id="trainEmail" required autocomplete="email" class="field" /></div>
+              <div><label for="trainPhone" class="field-label">Phone / WhatsApp</label><input type="tel" id="trainPhone" required autocomplete="tel" class="field" /></div>
+              <div><label for="trainCity" class="field-label">City &amp; country</label><input type="text" id="trainCity" required class="field" /></div>
+            </div>
+            <div><label for="trainTrack" class="field-label">I would like to serve in</label>
+              <select id="trainTrack" class="field">
+                <option value="Full-Time Field Missionary Training">Full-time field missionary training</option>
+                <option value="Rural & Village Crusade Evangelist">Village crusade evangelism</option>
+                <option value="Medical & Welfare Outreach Squad">Medical &amp; welfare outreach</option>
+                <option value="Street & Campus Fire Squad">Street &amp; campus evangelism</option>
+                <option value="Media, Technical & Bible Distribution">Media, technical &amp; Bible distribution</option>
+              </select>
+            </div>
+            <div><label for="trainReason" class="field-label">Why do you want to serve? (optional)</label><textarea id="trainReason" rows="2" class="field"></textarea></div>
+            <button type="submit" class="btn btn-red w-full justify-center">Apply</button>
+          </form>
+        </div>
+
+        <div id="prayer" class="card p-6 sm:p-8">
+          <h3 class="font-display text-2xl font-bold text-stsInk">Send a prayer request</h3>
+          <p class="text-gray-600 mt-2 mb-6">Our intercessors pray over every request, in confidence.</p>
+          <form onsubmit="submitPrayerForm(event)" class="space-y-4">
+            <div class="hp-field" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div><label for="prayName" class="field-label">Your name</label><input type="text" id="prayName" required autocomplete="name" class="field" /></div>
+              <div><label for="prayContact" class="field-label">Phone or email</label><input type="text" id="prayContact" required class="field" /></div>
+            </div>
+            <div><label for="prayType" class="field-label">Category</label>
+              <select id="prayType" class="field">
+                <option value="Healing & Deliverance">Healing &amp; deliverance</option>
+                <option value="Salvation of Family / Loved Ones">Salvation of family / loved ones</option>
+                <option value="Spiritual Revival & Fresh Fire">Spiritual revival</option>
+                <option value="Praise Report / Testimony">Praise report / testimony</option>
+              </select>
+            </div>
+            <div><label for="prayMessage" class="field-label">Your request</label><textarea id="prayMessage" required rows="4" class="field"></textarea></div>
+            <button type="submit" class="btn btn-dark w-full justify-center">Send prayer request</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section section-tint">
+    <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2 class="sec-title font-display">We would love to hear from you</h2>
+        <p class="lead mt-4">Questions about giving, the conference or joining an outreach? Call, WhatsApp or email the STS team.</p>
+        <a href="https://wa.me/2349136279311?text=Hello%20STS%2C%20I%20have%20a%20question." target="_blank" rel="noopener" class="btn btn-red mt-8"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Message us on WhatsApp</a>
+      </div>
+      <ul class="card contact-list">
+        <li class="contact-row">
+          <span class="pillar-ico"><i class="fa-solid fa-phone" aria-hidden="true"></i></span>
+          <div class="min-w-0 flex-1"><div class="contact-label">Phone &amp; WhatsApp</div><a href="tel:+2349136279311" class="contact-value">+234 913 627 9311</a></div>
+          <a href="https://wa.me/2349136279311" target="_blank" rel="noopener" class="contact-act" aria-label="WhatsApp +234 913 627 9311"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+        </li>
+        <li class="contact-row">
+          <span class="pillar-ico"><i class="fa-solid fa-phone" aria-hidden="true"></i></span>
+          <div class="min-w-0 flex-1"><div class="contact-label">Phone &amp; WhatsApp</div><a href="tel:+2349035458629" class="contact-value">+234 903 545 8629</a></div>
+          <a href="https://wa.me/2349035458629" target="_blank" rel="noopener" class="contact-act" aria-label="WhatsApp +234 903 545 8629"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+        </li>
+        <li class="contact-row">
+          <span class="pillar-ico"><i class="fa-solid fa-envelope" aria-hidden="true"></i></span>
+          <div class="min-w-0 flex-1"><div class="contact-label">Email</div><a href="mailto:stsglobaloutreach@gmail.com" class="contact-value break-all">stsglobaloutreach@gmail.com</a></div>
+        </li>
+        <li class="contact-row">
+          <span class="pillar-ico"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></span>
+          <div class="min-w-0 flex-1"><div class="contact-label">Facebook</div><a href="https://www.facebook.com/StsglobalOutreach" target="_blank" rel="noopener" class="contact-value">STS Global Outreach</a></div>
+        </li>
+      </ul>
+    </div>
+  </section>
   </main>
 
   <!-- FOOTER -->
-  <footer class="site-footer text-sm text-white/70">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
-      <!-- Closing call to action -->
-      <div class="footer-cta">
+  <footer class="site-footer">
+    <div class="max-w-6xl mx-auto px-5 py-12 flex flex-col md:flex-row md:items-center justify-between gap-8">
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-12 bg-stsRed rounded-md p-1.5 shrink-0"><img src="assets/img/logo.png" alt="" loading="lazy" width="212" height="292" class="w-full h-full object-contain" /></span>
         <div>
-          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white">Someone is waiting to hear.</h2>
-          <p class="text-white/80 mt-2 max-w-xl">One Bible, one missionary, one village at a time. Stand with us today.</p>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-3 shrink-0">
-          <a href="#giving" class="btn-light"><i class="fa-solid fa-heart" aria-hidden="true"></i> Give Now</a>
-          <a href="#partner" class="btn-outline-light"><i class="fa-solid fa-seedling" aria-hidden="true"></i> Partner Monthly</a>
+          <p class="font-display font-bold text-white text-lg leading-tight">Saved To Be Sent</p>
+          <p class="text-white/60 text-sm">&ldquo;How shall they preach, except they be sent?&rdquo; Romans 10:15</p>
         </div>
       </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 pt-14">
-        <div class="space-y-4">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-14 bg-stsRed rounded-md p-1.5 shrink-0"><img src="assets/img/logo.png" alt="" loading="lazy" width="212" height="292" class="w-full h-full object-contain" /></div>
-            <div>
-              <p class="text-white font-display font-bold text-lg leading-tight">Saved To Be Sent</p>
-              <p class="font-script text-stsRed text-xl leading-none">Saved to save&trade;</p>
-            </div>
-          </div>
-          <p class="leading-relaxed">&ldquo;How shall they preach, except they be sent?&rdquo; <span class="text-white/50">Romans 10:15</span></p>
-        </div>
-        <nav aria-label="Footer: explore">
-          <h3 class="footer-h">Explore</h3>
-          <ul class="space-y-2.5">
-            <li><a href="#events" class="footer-link">2027 Conference</a></li>
-            <li><a href="#catalog" class="footer-link">Our Work &amp; Impact</a></li>
-            <li><a href="#gospel-map" class="footer-link">Mission Map</a></li>
-            <li><button type="button" onclick="openHookModal()" class="footer-link">Why $10 Matters</button></li>
-          </ul>
-        </nav>
-        <nav aria-label="Footer: get involved">
-          <h3 class="footer-h">Get Involved</h3>
-          <ul class="space-y-2.5">
-            <li><a href="#giving" class="footer-link">Give Once</a></li>
-            <li><a href="#partner" class="footer-link">Become a Monthly Partner</a></li>
-            <li><a href="#training" class="footer-link">Join the Mission Field</a></li>
-            <li><a href="#prayer" class="footer-link">Send a Prayer Request</a></li>
-          </ul>
-        </nav>
-        <div>
-          <h3 class="footer-h">Contact</h3>
-          <ul class="space-y-2.5">
-            <li><a href="tel:+2349136279311" class="footer-link"><i class="fa-solid fa-phone w-5" aria-hidden="true"></i>+234 913 627 9311</a></li>
-            <li><a href="https://wa.me/2349035458629" target="_blank" rel="noopener" class="footer-link"><i class="fa-brands fa-whatsapp w-5" aria-hidden="true"></i>+234 903 545 8629</a></li>
-            <li><a href="mailto:stsglobaloutreach@gmail.com" class="footer-link break-all"><i class="fa-solid fa-envelope w-5" aria-hidden="true"></i>stsglobaloutreach@gmail.com</a></li>
-          </ul>
-          <div class="flex gap-2 mt-5">
-            <a href="https://www.facebook.com/StsglobalOutreach" target="_blank" rel="noopener" class="social-btn" aria-label="STS on Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
-            <a href="https://wa.me/2349136279311" target="_blank" rel="noopener" class="social-btn" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
-            <a href="https://www.facebook.com/olaseru.daniel" target="_blank" rel="noopener" class="social-btn" aria-label="Daniel on Facebook"><i class="fa-solid fa-user" aria-hidden="true"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="border-t border-white/10 mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/50">
-        <p>&copy; <span id="footerYear">2026</span> Saved To Be Sent Mission Outreach. All rights reserved.</p>
-        <p>Every seed is tagged to the purpose you choose.</p>
-      </div>
+      <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm" aria-label="Footer">
+        <a href="#about" class="footer-link">About</a>
+        <a href="#events" class="footer-link">Events</a>
+        <a href="#giving" class="footer-link">Give</a>
+        <a href="#involved" class="footer-link">Get Involved</a>
+        <button type="button" onclick="openHookModal()" class="footer-link">Why $10 matters</button>
+      </nav>
+    </div>
+    <div class="border-t border-white/10">
+      <p class="max-w-6xl mx-auto px-5 py-5 text-xs text-white/50">&copy; <span id="footerYear">2026</span> Saved To Be Sent Mission Outreach. Saved to save&trade;</p>
     </div>
   </footer>
 
-  <!-- Mobile quick actions: giving and registering stay one tap away while scrolling -->
-  <nav class="mobile-cta lg:hidden" aria-label="Quick actions">
-    <a href="#events" class="mobile-cta-btn"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Register</a>
-    <a href="#giving" class="mobile-cta-btn is-primary"><i class="fa-solid fa-heart" aria-hidden="true"></i> Give Now</a>
-  </nav>
-
-  <!-- ATTENTION HOOK WELCOME MODAL (SHOWS ON VISIT) -->
+  <!-- "WHY $10 MATTERS" POPUP (opens from the footer link only) -->
   <div id="hookPopupModal" class="sts-modal fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="hookTitle">
     <!-- The close button sits outside the scrolling area, so it stays visible on short phone screens. -->
     <div class="modal-panel relative bg-stsCard border-2 border-stsRed rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl">

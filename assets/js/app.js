@@ -314,22 +314,13 @@ function renderCatalog(filter) {
     return;
   }
   grid.innerHTML = items.map(item => `
-    <div class="bg-stsCard border border-black/10 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-stsRed transition shadow-lg">
-      <div>
-        <div class="h-52 relative bg-stsObsidian">
-          ${safeImg(item.img) ? `<img src="${esc(safeImg(item.img))}" alt="${esc(item.title)}" loading="lazy" decoding="async" class="w-full h-full object-cover" />` : ""}
-          <span class="absolute top-3 left-3 bg-stsRed text-white text-[11px] font-bold px-3 py-1 rounded-full">${esc(item.category)}</span>
-        </div>
-        <div class="p-6">
-          <h3 class="font-bold text-lg text-gray-900 mb-2">${esc(item.title)}</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">${esc(item.desc)}</p>
-        </div>
+    <div class="work-card">
+      <div class="work-img">
+        ${safeImg(item.img) ? `<img src="${esc(safeImg(item.img))}" alt="${esc(item.title)}" loading="lazy" decoding="async" class="w-full h-full object-cover" />` : ""}
       </div>
-      <div class="px-6 pb-6">
-        <a href="#giving" class="inline-flex items-center text-xs font-bold text-stsRed hover:underline">
-          Sponsor Similar Outreach &rarr;
-        </a>
-      </div>
+      <p class="work-cat">${esc(item.category)}</p>
+      <h3 class="work-title">${esc(item.title)}</h3>
+      <p class="work-desc">${esc(item.desc)}</p>
     </div>
   `).join('');
 }
@@ -339,14 +330,10 @@ function renderCatalog(filter) {
 function renderVideos() {
   const grid = document.getElementById("videoGrid");
   const vids = (appState.videos || []).map(v => ({ title: v.title, id: youtubeId(v.embed || v.url) })).filter(v => v.id);
-  if (!vids.length) {
-    grid.innerHTML = `<div class="col-span-full text-center bg-stsCard border border-black/10 rounded-2xl p-8">
-      <i class="fa-solid fa-video text-stsRed text-2xl"></i>
-      <p class="text-gray-600 text-sm mt-3">Outreach videos are on their way. Meanwhile, see the latest from the field on our Facebook page.</p>
-      <a href="https://www.facebook.com/StsglobalOutreach" target="_blank" rel="noopener" class="inline-block mt-4 bg-stsRed hover:bg-red-700 text-white font-bold text-sm px-5 py-2.5 rounded-lg"><i class="fa-brands fa-facebook mr-1.5"></i>Watch on Facebook</a>
-    </div>`;
-    return;
-  }
+  // The videos block stays hidden until the admin adds real YouTube links.
+  const section = document.getElementById("videos");
+  if (section) section.classList.toggle("hidden", !vids.length);
+  if (!vids.length) { grid.innerHTML = ""; return; }
   grid.innerHTML = vids.map(v => `
     <div class="bg-stsObsidian border border-black/10 rounded-2xl overflow-hidden">
       <button type="button" class="yt-facade group relative block w-full aspect-video bg-black" data-yt="${esc(v.id)}" aria-label="Play video: ${esc(v.title)}">
@@ -459,6 +446,7 @@ async function focusMapRegion(region) {
 }
 
 function renderMapLists() {
+  if (!document.getElementById("listAfricaReached")) return; // map not on this page
   const renderList = (regionKey) => appState.mapLocations
     .filter(l => l.region === regionKey)
     .map(l => `
@@ -508,17 +496,13 @@ function updateCountdowns() {
 
 // Purpose-Driven Giving Selector
 function highlightGivingCards(purpose) {
+  // Styling lives in site.css (.give-cat-card[aria-pressed="true"]); this only flips the state.
   document.querySelectorAll(".give-cat-card").forEach(card => {
     const m = (card.getAttribute("onclick") || "").match(/setGivingCategory\('(.*)'\)/);
-    const mine = m && m[1] === purpose;
+    const mine = !!(m && m[1] === purpose);
+    card.setAttribute("aria-pressed", String(mine));
     const badge = card.querySelector(":scope > span");
-    card.className = "give-cat-card cursor-pointer bg-stsCard p-4 rounded-xl flex items-center justify-between transition " +
-      (mine ? "border-2 border-stsRed" : "border border-black/10 hover:border-stsRed");
-    card.setAttribute("aria-pressed", String(!!mine));
-    if (badge) {
-      badge.textContent = mine ? "Selected" : "Select";
-      badge.className = mine ? "text-xs font-extrabold bg-stsRed text-white px-2.5 py-1 rounded" : "text-xs font-bold text-gray-500";
-    }
+    if (badge) badge.textContent = mine ? "Selected" : "Select";
   });
 }
 
@@ -716,7 +700,10 @@ function updateCountsUI() {
   bar.style.width = pct + "%";
   bar.parentElement.setAttribute("aria-valuenow", String(taken));
   bar.parentElement.setAttribute("aria-valuemax", String(confCapacity()));
-  document.getElementById("aprilRegCountDisplay").textContent = (liveCounts.april || 0) + " Joined";
+  const aprilCount = document.getElementById("aprilRegCountDisplay");
+  aprilCount.textContent = (liveCounts.april || 0) + " Joined";
+  // A "0 joined" line puts people off; show the count once someone has joined.
+  aprilCount.parentElement.classList.toggle("hidden", !liveCounts.april);
   const v = document.getElementById("viewMyInvoiceBtn");
   if (v) v.classList.toggle("hidden", !appState.lastReg);
 }
@@ -1955,10 +1942,8 @@ function pledgeFromCustom() {
 document.addEventListener("reset", () => setTimeout(refreshCurrencyUI, 0));
 
 // ---------- Section hubs: related sections live under one heading with tabs ----------
-const HUBS = [
-  { id: "hub-work", title: "Our Work & Impact", sub: "Everything we have done on the field, in one place.", tabs: [["catalog", "Outreach Catalog", "fa-images"], ["gallery", "Photo Gallery", "fa-camera"], ["videos", "Videos", "fa-circle-play"], ["gospel-map", "Gospel Map", "fa-earth-africa"]] },
-  { id: "hub-give", title: "Give & Partner", sub: "Give once, or walk with us every month.", tabs: [["giving", "Give Once", "fa-heart"], ["partner", "Monthly Partner", "fa-seedling"]] }
-];
+// Sections used to be grouped under tabs; the simple layout shows them in one flow.
+const HUBS = [];
 function showTab(hub, id) {
   hub.querySelectorAll(".hub-panel").forEach(p => p.classList.toggle("is-off", p.id !== id));
   hub.querySelectorAll(".sts-tab").forEach(b => {
@@ -2128,8 +2113,8 @@ function setupMotion() {
   // Static blocks only: cards that app.js re-renders would flash on every update.
   document.documentElement.classList.add("js-reveal");
   const targets = [
-    ".sec-title", ".sts-hub-head", "#hook-section .grid > div", "#events .grid > div", ".give-cat-card",
-    "#giving .lg\\:col-span-5", "#partner figure", "#training .grid > div", "#about .about-card", ".footer-cta", "#gospel-map .grid > div"
+    ".sec-head", "#about .about-photo", "#about .pillars", ".event-card", ".give-cat-card",
+    "#giving .lg\\:col-span-2 > *", ".partner-band", "#involved .card", "#contact .contact-list"
   ];
   document.querySelectorAll(targets.join(",")).forEach((el, i) => {
     el.classList.add("reveal");
