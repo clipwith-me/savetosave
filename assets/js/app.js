@@ -991,23 +991,24 @@ function stampSvg(dateText) {
       <path id="stampTop" d="M 16,80 a 64,64 0 1,1 128,0"/>
       <path id="stampBot" d="M 14,80 a 66,66 0 0,0 132,0"/>
     </defs>
-    <circle cx="80" cy="80" r="74" fill="none" stroke="#E60000" stroke-width="4"/>
-    <circle cx="80" cy="80" r="52" fill="none" stroke="#E60000" stroke-width="2"/>
-    <text font-size="7.8" font-weight="800" fill="#E60000" letter-spacing=".4"><textPath href="#stampTop" startOffset="50%" text-anchor="middle">SAVED TO BE SENT MISSION OUTREACH</textPath></text>
-    <text font-size="10" font-weight="800" fill="#E60000" letter-spacing="2"><textPath href="#stampBot" startOffset="50%" text-anchor="middle">OFFICIAL APPROVAL</textPath></text>
-    <text x="80" y="82" text-anchor="middle" font-size="19" font-weight="900" fill="#E60000">APPROVED</text>
-    <text x="80" y="98" text-anchor="middle" font-size="9" font-weight="700" fill="#E60000">${esc(dateText)}</text>
+    <circle cx="80" cy="80" r="74" fill="none" stroke="#9b1b1f" stroke-width="4"/>
+    <circle cx="80" cy="80" r="52" fill="none" stroke="#9b1b1f" stroke-width="2"/>
+    <text font-size="7.8" font-weight="800" fill="#9b1b1f" letter-spacing=".4"><textPath href="#stampTop" startOffset="50%" text-anchor="middle">SAVED TO BE SENT MISSION OUTREACH</textPath></text>
+    <text font-size="10" font-weight="800" fill="#9b1b1f" letter-spacing="2"><textPath href="#stampBot" startOffset="50%" text-anchor="middle">OFFICIAL APPROVAL</textPath></text>
+    <text x="80" y="82" text-anchor="middle" font-size="19" font-weight="900" fill="#9b1b1f">APPROVED</text>
+    <text x="80" y="98" text-anchor="middle" font-size="9" font-weight="700" fill="#9b1b1f">${esc(dateText)}</text>
   </svg>`;
 }
 
 function invoiceHtml(r) {
   const logo = document.querySelector("header img").src;
-  const bedText = r.hostel ? esc(r.bed) : "N/A";
-  const bedNote = r.hostel ? "hostel bed" : "not in hostel";
+  const bedText = r.hostel ? esc(r.bed) : "—";
+  const dayWord = r.days === 1 ? "day" : "days";
+  const first = esc(String(r.name).trim().split(/\s+/)[0]);
   const tickets = r.meals.map(t => `
     <div class="inv-ticket">
-      <div class="inv-ticket-top">MEAL TICKET</div>
-      <div class="inv-ticket-main">${esc(t.day)} - ${esc(t.meal)}</div>
+      <div class="inv-ticket-top">Meal ticket</div>
+      <div class="inv-ticket-main">${esc(t.day)} · ${esc(t.meal)}</div>
       <div class="inv-ticket-sub">${esc(t.date)}</div>
       <div class="inv-ticket-id">${esc(t.code)}</div>
     </div>`).join("");
@@ -1017,51 +1018,55 @@ function invoiceHtml(r) {
       <div class="inv-brand">
         <div class="inv-logo"><img src="${logo}" alt="STS logo"></div>
         <div>
-          <div class="inv-org">SAVED TO BE SENT</div>
+          <div class="inv-org">Saved To Be Sent</div>
           <div class="inv-org2">Mission Outreach</div>
-          <div class="inv-script">Saved to save&trade;</div>
         </div>
       </div>
       <div class="inv-meta">
-        <div class="inv-title">REGISTRATION INVOICE</div>
-        <div>Reg ID: <b>${esc(r.regId)}</b></div>
-        <div>Issued: ${esc(r.issued)}</div>
+        <div class="inv-title">Registration confirmation</div>
+        <div>No. <b>${esc(r.regId)}</b></div>
+        <div>Issued ${esc(r.issuedDate)}</div>
       </div>
     </div>
-    <div class="inv-banner">
-      <div class="inv-congrats">Congratulations, ${esc(r.name)}!</div>
-      <p>Your registration for the <b>Missionaries Conference 2027</b> is successful and approved.</p>
+
+    <div class="inv-event">
+      <div class="inv-event-name">Missionaries Conference 2027</div>
+      <div class="inv-event-meta">February 10 – 12, 2027 &nbsp;·&nbsp; Theme: <i>${esc(S().theme)}</i></div>
     </div>
-    <div class="inv-theme">Conference Theme: <i>${esc(S().theme)}</i></div>
-    <p class="inv-welcome"><b>Welcome note:</b> Welcome to the Missionaries Conference 2027, themed <i><b>${esc(S().theme)}</b></i>. We are glad to have you with us. From February 10 to 12, 2027 we will be equipped, set on fire and sent out as living witnesses of Christ. Keep this invoice safe and show it at the registration desk.</p>
+
+    <p class="inv-welcome">Dear ${first},</p>
+    <p class="inv-welcome">Your registration is confirmed and your place is reserved. We are glad to have you with us as we gather to be equipped and sent out as witnesses of Christ. Please bring this confirmation, printed or on your phone, to the registration desk.</p>
+
     <div class="inv-grid">
-      <div class="inv-seatbox"><span>SEAT NO.</span><b>${esc(r.seat)}</b><small>your seat</small></div>
-      <div class="inv-seatbox"><span>BED NO.</span><b>${bedText}</b><small>${bedNote}</small></div>
-      <div class="inv-seatbox"><span>DAYS</span><b>${esc(r.days)}</b><small>${r.days === 1 ? "day" : "days"} attending</small></div>
+      <div class="inv-seatbox"><span>Seat</span><b>${esc(r.seat)}</b></div>
+      <div class="inv-seatbox"><span>Bed</span><b>${bedText}</b><small>${r.hostel ? "hostel" : "not in hostel"}</small></div>
+      <div class="inv-seatbox"><span>Attending</span><b>${esc(r.days)}</b><small>${dayWord}</small></div>
     </div>
+
     <table class="inv-table">
-      <tr><td>Full name</td><td>${esc(r.name)}</td></tr>
+      <tr><td>Name</td><td>${esc(r.name)}</td></tr>
       <tr><td>Email</td><td>${esc(r.email)}</td></tr>
       <tr><td>Phone</td><td>${esc(r.phone)}</td></tr>
       <tr><td>Location</td><td>${esc(r.location)}</td></tr>
-      <tr><td>Event</td><td>Missionaries Conference 2027</td></tr>
-      <tr><td>Dates</td><td>February 10 - 12, 2027</td></tr>
-      <tr><td>Hostel</td><td>${r.hostel ? "Yes, staying in the hostel" : "No, not staying in the hostel"}</td></tr>
-      <tr><td>Meal tickets</td><td>${r.meals.length} (2 meals a day for ${esc(r.days)} ${r.days === 1 ? "day" : "days"})</td></tr>
+      <tr><td>Accommodation</td><td>${r.hostel ? "Hostel, bed " + bedText : "Not staying in the hostel"}</td></tr>
+      <tr><td>Meals</td><td>${r.meals.length} tickets (2 a day for ${esc(r.days)} ${dayWord})</td></tr>
     </table>
-    <div class="inv-sec-title">Meal tickets - 2 meals a day</div>
+
+    <div class="inv-sec-title">Meal tickets</div>
     <div class="inv-tickets">${tickets}</div>
+
     <div class="inv-verse">&ldquo;${esc(S().verseText)}&rdquo;<div>${esc(S().verseRef)}</div></div>
-    ${r.personal ? `<div class="inv-personal"><div class="inv-personal-t">A WORD FOR YOU, ${esc(String(r.name).trim().split(/\s+/)[0].toUpperCase())}</div>&ldquo;${esc(r.personal.text)}&rdquo;<div class="inv-personal-r">${esc(r.personal.ref)}</div><div class="inv-personal-p"><b>Your prayer point:</b> ${esc(r.personal.prayer)}</div><div class="inv-personal-c">${esc(r.personal.charge)}</div></div>` : ""}
+    ${r.personal ? `<div class="inv-personal"><div class="inv-personal-t">A word for you</div>&ldquo;${esc(r.personal.text)}&rdquo; <span class="inv-personal-r">${esc(r.personal.ref)}</span><div class="inv-personal-p">${esc(r.personal.prayer)}</div></div>` : ""}
+
     <div class="inv-sign">
-      <div class="inv-sign-text"><b>Approved by the ministry</b><br>Saved To Be Sent Mission Outreach<br>Registration ID: ${esc(r.regId)}<div class="inv-signature">Daniel</div><div class="inv-signline">Daniel, for the ministry</div></div>
+      <div class="inv-sign-text"><div class="inv-signature">Daniel</div><div class="inv-signline">For Saved To Be Sent Mission Outreach</div></div>
       ${stampSvg(r.issuedDate)}
     </div>
-    <div class="inv-cut"><span><i class="fa-solid fa-scissors"></i> cut here - registration ID segment</span></div>
+
+    <div class="inv-cut"><span>Registration desk copy</span></div>
     <div class="inv-stub">
-      <div class="inv-stub-id">${esc(r.regId)}</div>
-      <div><b>${esc(r.name)}</b></div>
-      <div>Seat ${esc(r.seat)} | Bed ${bedText} | ${esc(r.days)} ${r.days === 1 ? "day" : "days"}</div>
+      <div><div class="inv-stub-id">${esc(r.regId)}</div><div>${esc(r.name)}</div></div>
+      <div class="inv-stub-figs">Seat <b>${esc(r.seat)}</b> &nbsp; Bed <b>${bedText}</b> &nbsp; ${esc(r.days)} ${dayWord}</div>
     </div>
   </div>`;
 }
@@ -1107,7 +1112,7 @@ async function downloadInvoicePdf() {
     let y = 0, left = h - pageH;
     pdf.addImage(img, "JPEG", 0, y, w, h);
     while (left > 0) { y -= pageH; pdf.addPage(); pdf.addImage(img, "JPEG", 0, y, w, h); left -= pageH; }
-    pdf.save("STS-Invoice-" + r.regId + ".pdf");
+    pdf.save("STS-Registration-" + r.regId + ".pdf");
   } catch (e) {
     alert("The PDF tool could not load, so the print window will open instead. Choose Save as PDF there.");
     printInvoice();

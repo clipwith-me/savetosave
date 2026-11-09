@@ -155,53 +155,54 @@ section[id],#prayer,#training,#partner{scroll-margin-top:84px}
 @media (prefers-reduced-motion:reduce){.hero-slide{transition:opacity .01ms!important;transform:none!important}}
 
 /* ===== Registration invoice ===== */
-.inv-sheet{background:#fff;color:#111;border:2px solid #E60000;border-radius:14px;padding:18px;max-width:680px;margin:0 auto;font-family:'Plus Jakarta Sans',sans-serif;position:relative}
-.inv-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;border-bottom:3px solid #E60000;padding-bottom:12px}
-.inv-brand{display:flex;gap:10px;align-items:center}
-.inv-logo{width:46px;height:62px;background:#E60000;border-radius:6px;padding:6px;flex-shrink:0}
+.inv-sheet{--ink:#1c1c20;--soft:#6b6b73;--rule:#e4e1dc;--accent:#9b1b1f;background:#fff;color:var(--ink);border:1px solid var(--rule);border-radius:6px;padding:28px 26px;max-width:680px;margin:0 auto;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;line-height:1.55;position:relative;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.inv-top{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start;padding-bottom:16px;border-bottom:1px solid var(--ink)}
+.inv-brand{display:flex;gap:12px;align-items:center}
+.inv-logo{width:34px;height:46px;background:#E60000;border-radius:3px;padding:5px;flex-shrink:0}
 .inv-logo img{width:100%;height:100%;object-fit:contain}
-.inv-org{font-family:'Cinzel',serif;font-weight:800;font-size:16px;letter-spacing:1px;line-height:1.1}
-.inv-org2{font-size:11px;font-weight:700;color:#E60000;letter-spacing:2px;text-transform:uppercase}
-.inv-script{font-family:'Dancing Script',cursive;color:#E60000;font-size:19px;line-height:1}
-.inv-meta{text-align:right;font-size:12px;color:#444;line-height:1.5}
-.inv-title{font-weight:800;color:#E60000;font-size:14px;letter-spacing:1px}
-.inv-banner{background:#E60000;color:#fff;border-radius:10px;padding:14px;margin:14px 0 8px;text-align:center}
-.inv-congrats{font-family:'Cinzel',serif;font-size:20px;font-weight:800}
-.inv-banner p{margin:4px 0 0;font-size:13px}
-.inv-personal{border:1.5px dashed #E60000;border-radius:10px;padding:12px;margin:12px 0;background:#FEF2F2;font-size:13px;line-height:1.5;color:#222;font-style:italic}
-.inv-personal-t{font-style:normal;font-weight:800;color:#E60000;letter-spacing:1px;font-size:11px;margin-bottom:4px}
-.inv-personal-r{font-style:normal;font-weight:800;color:#990000;font-size:12px;margin-top:2px}
-.inv-personal-p,.inv-personal-c{font-style:normal;margin-top:6px}
-.inv-theme{text-align:center;font-style:italic;font-weight:800;color:#990000;font-size:13px;letter-spacing:1px;margin:2px 0 6px}
-.inv-welcome{font-size:13px;color:#333;line-height:1.55;margin:8px 0 12px}
-.inv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
-.inv-seatbox{background:#FEF2F2;border:1.5px solid #E60000;border-radius:10px;text-align:center;padding:8px 4px}
-.inv-seatbox span{display:block;font-size:10px;font-weight:800;letter-spacing:1px;color:#990000}
-.inv-seatbox b{display:block;font-size:28px;color:#E60000;line-height:1.15}
-.inv-seatbox small{font-size:10px;color:#555}
-.inv-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:12px}
-.inv-table td{padding:6px 8px;border-bottom:1px solid #eee;vertical-align:top}
-.inv-table td:first-child{color:#777;width:36%}
-.inv-table td:last-child{font-weight:700;word-break:break-word}
-.inv-sec-title{font-size:11px;font-weight:800;letter-spacing:1.5px;color:#E60000;text-transform:uppercase;margin:6px 0}
-.inv-tickets{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+.inv-org{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:17px;line-height:1.15}
+.inv-org2{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.inv-meta{text-align:right;font-size:12px;color:var(--soft);line-height:1.6}
+.inv-meta b{color:var(--ink);font-variant-numeric:tabular-nums}
+.inv-title{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+.inv-event{padding:20px 0 6px}
+.inv-event-name{font-family:'Playfair Display',Georgia,serif;font-size:24px;font-weight:700;line-height:1.2}
+.inv-event-meta{color:var(--soft);font-size:12.5px;margin-top:4px}
+.inv-welcome{margin:10px 0 0;color:#33333a}
+.inv-grid{display:grid;grid-template-columns:repeat(3,1fr);margin:22px 0 18px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.inv-seatbox{padding:14px 6px;text-align:center;border-left:1px solid var(--rule)}
+.inv-seatbox:first-child{border-left:0}
+.inv-seatbox span{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.inv-seatbox b{display:block;font-family:'Playfair Display',Georgia,serif;font-size:34px;line-height:1.1;margin-top:4px;font-variant-numeric:tabular-nums}
+.inv-seatbox small{font-size:11px;color:var(--soft)}
+.inv-table{width:100%;border-collapse:collapse;margin-bottom:18px}
+.inv-table td{padding:8px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.inv-table td:first-child{color:var(--soft);width:38%;padding-right:12px}
+.inv-table td:last-child{font-weight:600;word-break:break-word}
+.inv-sec-title{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin:4px 0 8px}
+.inv-tickets{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:20px}
 @media (min-width:520px){.inv-tickets{grid-template-columns:repeat(3,1fr)}}
-.inv-ticket{border:2px dashed #E60000;border-radius:8px;padding:6px 8px;text-align:center;background:#fff}
-.inv-ticket-top{font-size:9px;font-weight:800;letter-spacing:1.5px;color:#fff;background:#E60000;border-radius:4px;padding:2px 0;margin-bottom:4px}
-.inv-ticket-main{font-weight:800;font-size:13px}
-.inv-ticket-sub{font-size:10px;color:#555}
-.inv-ticket-id{font-size:9px;color:#990000;margin-top:3px;word-break:break-all}
-.inv-verse{border-left:4px solid #E60000;background:#FEF2F2;padding:10px 12px;border-radius:0 8px 8px 0;font-size:13px;line-height:1.5;margin-bottom:12px}
-.inv-verse div{font-weight:800;color:#E60000;margin-top:4px;font-size:12px;font-style:normal}
-.inv-sign{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
-.inv-sign-text{font-size:12px;color:#333;line-height:1.5}
-.inv-signature{font-family:'Great Vibes','Snell Roundhand','Brush Script MT',cursive;font-size:40px;color:#1a237e;line-height:1.1;margin-top:8px}
-.inv-signline{border-top:1px solid #333;font-size:11px;padding-top:2px;width:190px;color:#333}
-.inv-stamp{width:120px;height:120px;transform:rotate(-12deg);opacity:.92;flex-shrink:0}
-.inv-cut{border-top:2px dashed #999;margin:12px 0 8px;text-align:center;height:0}
-.inv-cut span{position:relative;top:-11px;background:#fff;padding:0 8px;font-size:11px;color:#666}
-.inv-stub{border:2px dashed #E60000;border-radius:8px;padding:8px 12px;text-align:center;font-size:12px;line-height:1.5}
-.inv-stub-id{font-weight:800;font-size:16px;color:#E60000;letter-spacing:1px}
+.inv-ticket{border:1px solid var(--rule);border-left:3px solid var(--accent);border-radius:3px;padding:8px 10px;background:#fbfaf8}
+.inv-ticket-top{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.inv-ticket-main{font-weight:700;font-size:13px;margin-top:2px}
+.inv-ticket-sub{font-size:11px;color:var(--soft)}
+.inv-ticket-id{font-size:11px;color:var(--ink);margin-top:4px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-all}
+.inv-verse{border-left:2px solid var(--accent);padding:2px 0 2px 14px;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:14px;line-height:1.5;margin-bottom:16px;color:#33333a}
+.inv-verse div{font-family:'Plus Jakarta Sans',sans-serif;font-style:normal;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-top:6px}
+.inv-personal{background:#f6f4f0;border-radius:4px;padding:12px 14px;margin-bottom:18px;color:#33333a}
+.inv-personal-t{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:4px}
+.inv-personal-r{color:var(--soft);font-size:12px}
+.inv-personal-p{margin-top:6px}
+.inv-sign{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:8px 0 6px}
+.inv-sign-text{font-size:12px;color:var(--soft)}
+.inv-signature{font-family:'Great Vibes','Snell Roundhand','Brush Script MT',cursive;font-size:36px;color:#1f2a5a;line-height:1}
+.inv-signline{border-top:1px solid var(--ink);padding-top:4px;margin-top:2px;min-width:200px}
+.inv-stamp{width:104px;height:104px;transform:rotate(-8deg);opacity:.85;flex-shrink:0}
+.inv-cut{border-top:1px dashed #b9b5ae;margin:18px 0 10px;text-align:center;height:0}
+.inv-cut span{position:relative;top:-9px;background:#fff;padding:0 10px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.inv-stub{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:12.5px}
+.inv-stub-id{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:700;font-size:15px;letter-spacing:.04em}
+.inv-stub-figs b{font-family:'Playfair Display',Georgia,serif;font-size:16px}
 .inv-sheet, .inv-sheet *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 @media print {
   body.printing-invoice > *:not(#invoiceModal){display:none !important}
@@ -249,8 +250,11 @@ html.modal-open,html.modal-open body{overflow:hidden}
 /* The invoice reads comfortably on a phone and its stamp stays on screen. */
 @media(max-width:520px){
   .inv-sign{flex-wrap:wrap}
-  .inv-stamp{width:92px;height:92px}
-  .inv-ticket-top,.inv-ticket-id,.inv-ticket-sub,.inv-seatbox span,.inv-seatbox small,.inv-org2,.inv-sec-title{font-size:11px}
+  .inv-stamp{width:84px;height:84px}
+  .inv-sheet{padding:22px 18px}
+  .inv-meta{text-align:left;width:100%}
+  .inv-event-name{font-size:21px}
+  .inv-seatbox b{font-size:28px}
 }
 @media(max-width:400px){.bank > div{grid-template-columns:1fr;gap:.15rem}}
 .btn-sm{min-height:40px}
@@ -258,6 +262,5 @@ html.modal-open,html.modal-open body{overflow:hidden}
 .footer-link{display:inline-flex;align-items:center;min-height:40px}
 #adminModal button{min-width:40px}
 .footer-link{min-width:44px}
-.inv-ticket-top,.inv-ticket-id,.inv-ticket-sub,.inv-seatbox span,.inv-seatbox small{font-size:11px}
 .brand-name{white-space:nowrap}
 @media(max-width:400px){.brand-sub{display:none}.site-header .px-5{padding-left:1rem;padding-right:1rem}}

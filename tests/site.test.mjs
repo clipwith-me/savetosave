@@ -101,8 +101,8 @@ test("conference registration through the Google Sheet backend", async () => {
   await fillRegistration(page, "ada@example.com");
   const sheetText = await page.textContent("#invoiceSheet");
   assert.match(sheetText, /STS-MC27-001/);
-  assert.match(sheetText, /SEAT NO\.\s*11/);
-  assert.match(sheetText, /BED NO\.\s*1/);
+  assert.match(sheetText, /Seat\s*11/);
+  assert.match(sheetText, /Bed\s*1\b/);
   assert.equal(await page.locator(".inv-ticket").count(), 6, "2 meals x 3 days");
   const reg = log.sheet.find(b => b.action === "register");
   assert.equal(reg.person.email, "ada@example.com");
